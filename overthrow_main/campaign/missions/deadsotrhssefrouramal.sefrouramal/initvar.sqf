@@ -1,0 +1,823 @@
+
+HCEnabled = false;
+AllowAirD = false;
+
+OT_nation = "Sefrou-Ramal";
+OT_saveName = "Overthrow.SFDOT.001";
+
+OT_tutorial_backstoryText = "Big bad.";
+OT_startDate = [2035,7,14,8,00];
+
+OT_startCameraPos = [3413.29,3966.35,22.7582];
+OT_startCameraTarget = [3629.91,4277.48,22.2105];
+
+OT_economyVersion = 5;
+OT_NATOversion = 5;
+OT_CRIMversion = 2;
+
+OT_faction_NATO = "BLU_F";
+OT_spawnFaction = "IND_G_F"; //This faction will have a rep in spawn town
+
+OT_flag_NATO = "Flag_NATO_F";
+OT_flag_NATO_txt = "a3\data_f\flags\flag_nato_co.paa";
+OT_flag_CRIM = "Flag_Syndikat_F";
+OT_flag_Crim_txt = "\A3\Data_F_Enoch\Flags\flag_looters_co.paa";
+OT_flag_IND = "Flag_Green_F";
+OT_flag_IND_txt = "\overthrow_main\flags\flag_malden2.paa";
+OT_flagImage = OT_flag_IND_txt;
+OT_flagMarker = "flag_Malden2";
+
+OT_populationMultiplier = 2; //Used to tweak populations per map
+
+OTForcedCarShops = [];
+
+OT_hasWS = isClass(configfile >> "CfgPatches" >> "data_f_lxWS");//Check if Western Sahara DLC is downloaded
+OT_hasNI = isClass(configfile >> "CfgPatches" >> "hlcweapons_core"); //Nation Indepedent Arsenal
+OT_hasFW = isClass(configFile >> "CfgFunctions" >> "FreeWorldArmoury"); //The Free World Armoury
+OT_has3F = isClass(configFile >> "CfgPatches" >> "UK3CB_Factions_Vehicles_Common"); // 3CB Factions
+
+//Building templates
+//To generate these templates:
+//1. Open Arma editor, choose VR map
+//2. Add the building you want to make a template for, set its location and rotation to 0,0,0
+//3. Add furniture objects
+//4. Add a player (any unit), Play the Scenario
+//5. Run this in console: [getPos player, 50, true] call BIS_fnc_ObjectsGrabber
+//6. Copy the results, paste them here and remove any extraneous items (ie the building, Logic, babe_helper, Signs)
+
+OT_shopBuildings = [
+	["Land_House_C_5_V1_EP1_off_lxWS",[],0,180],
+	["Land_House_C_5_V2_EP1_off_lxWS",[],0,180],
+	["Land_House_C_5_V3_EP1_off_lxWS",[],0,180],
+	["Land_House_K_1_EP1_lxWS",[],0,180]
+];
+
+OT_carShopBuildings = [
+	["Land_House_C_12_EP1_off_lxWS",[]],
+	["Land_CarService_F",[]]
+];
+
+OT_spawnHouseBuildings = [
+	["Land_House_K_1_EP1_lxWS",[]],
+	["Land_Shed_05_F",[]],
+	["Land_House_L_1_EP1_lxWS",[]],
+	["Land_House_L_3_EP1_lxWS",[]]
+];
+
+//Interactable items that spawn in your house
+OT_item_Storage = "B_CargoNet_01_ammo_F"; //Your spawn ammobox
+OT_item_Map = "Mapboard_Malden_F";
+OT_item_Tent = "Land_TentDome_F";
+OT_item_Safe = "Land_PlasticCase_01_small_olive_F";
+OT_item_Workbench = "Land_Workbench_01_F"; //Crafting Table
+OT_item_Desk = "OfficeTable_01_new_F";
+//OT_item_Radio = "Land_PortableLongRangeRadio_F";
+
+
+//Animals to spawn (@todo: spawn animals)
+OT_allLowAnimals = [""];
+OT_allHighAnimals = [""];
+OT_allFarmAnimals = [""];
+OT_allVillageAnimals = [""];
+OT_allTownAnimals = [""];
+
+OT_fuelPumps = ["Land_FuelStation_02_pump_F","Land_FuelStation_01_pump_F","Land_fs_feed_F","Land_FuelStation_Feed_F","Land_FuelStation_01_pump_malevil_F"];
+
+OT_churches = ["Land_Church_03_F","Land_Church_01_F","Land_Church_02_F","Land_Temple_Native_01_F"];
+
+OT_language_local = "LanguageFRE_F";
+OT_identity_local = "lxWS_Head_African";
+
+OT_language_western = "LanguageENG_F";
+OT_identity_western = "Head_Euro";
+
+OT_language_eastern = "LanguageCHI_F";
+OT_identity_eastern = "Head_Asian";
+
+OT_face_localBoss = "TanoanBossHead";
+
+
+OT_civType_gunDealer = "C_man_p_fugitive_F";
+OT_civType_local = "C_man_1";
+OT_civType_carDealer = "C_man_w_worker_F";
+OT_civType_shopkeeper = "C_man_w_worker_F";
+OT_civType_worker = "C_man_UtilityWorker_01_F";
+OT_civType_priest = "C_man_w_worker_F";
+OT_vehTypes_civ = ["C_Offroad_02_unarmed_F","C_Offroad_01_F","C_Quadbike_01_F","C_Hatchback_01_F","C_Van_01_transport_F","C_SUV_01_F","C_Van_02_transport_F","C_Offroad_01_covered_F","C_Offroad_01_comms_F"]; //populated automatically, but you can add more here and they will appear in streets
+OT_vehType_distro = "C_Van_01_box_F";
+OT_vehType_ferry = "C_Boat_Transport_02_F";
+OT_vehType_service = "C_Offroad_01_repair_F";
+OT_vehTypes_civignore = ["C_Hatchback_01_sport_F",OT_vehType_service,"OT_C_T_LSV","OT_C_T_LSV2","C_SUV_01_F","C_Offroad_01_comms_F"]; //Civs cannot drive these vehicles for whatever reason
+
+OT_clothes_locals = [
+	"U_I_C_Soldier_Bandit_1_F","U_I_C_Soldier_Bandit_2_F","U_I_C_Soldier_Bandit_3_F","U_C_Poor_1","U_C_Poor_2","eo_hoodie_red","eo_hoodie_grey","eo_hoodie_blue","eo_hoodie_bandit","eo_hoodie_kabeiroi","eo_retro_red","eo_retro_grey","eo_retro_blue",
+	"eo_retro_bandit","eo_retro_kabeiroi","eo_shirt_bandit","eo_shirt_kabeiroi","eo_shirt_stripe","eo_shirt_check","eo_shirt_plainblu","eo_shirt_plainblk","eo_shirt_checkbrn","eo_shirt_checkblk"
+];
+
+OT_clothes_expats = ["U_I_C_Soldier_Bandit_5_F","U_C_Poloshirt_blue","U_C_Poloshirt_burgundy","U_C_Poloshirt_redwhite","U_C_Poloshirt_salmon","U_C_Poloshirt_stripped","U_C_Man_casual_6_F","U_C_Man_casual_4_F","U_C_Man_casual_5_F"];
+OT_clothes_tourists = ["U_C_Poloshirt_blue","U_C_Poloshirt_burgundy","U_C_Poloshirt_redwhite","U_C_Poloshirt_stripped","U_C_E_LooterJacket_01_F","U_I_G_Story_Protagonist_F"];
+OT_clothes_priest = "U_C_Man_casual_2_F";
+OT_clothes_port = "U_Marshal";
+OT_clothes_shops = ["U_C_Man_casual_2_F","U_C_Man_casual_3_F","U_C_Man_casual_1_F","U_C_IDAP_Man_shorts_F","U_C_FormalSuit_01_black_F","U_C_FormalSuit_01_tshirt_gray_F","U_C_Uniform_Scientist_02_formal_F"];
+OT_clothes_carDealers = ["U_Marshal","U_C_Mechanic_01_F"];
+OT_clothes_harbor = ["U_C_man_sport_1_F","U_C_man_sport_2_F","U_C_man_sport_3_F"];
+OT_clothes_guerilla = ["U_I_C_Soldier_Para_1_F","U_I_C_Soldier_Para_2_F","U_I_C_Soldier_Para_3_F","U_I_C_Soldier_Para_4_F","U_BG_Guerilla2_1","U_I_L_Uniform_01_tshirt_olive_F","rhsgref_uniform_altis_lizard","rhsgref_uniform_dpm","rhsgref_uniform_flecktarn_full","rhsgref_uniform_og107","rhsgref_uniform_woodland_olive","rhsgref_uniform_TLA_1",
+	"rhsgref_uniform_para_ttsko_mountain","rhsgref_uniform_3color_desert","rhsgref_uniform_alpenflage","rhsgref_uniform_reed","rhsgref_uniform_para_ttsko_urban","rhsgref_uniform_gorka_1_f","rhssaf_uniform_m93_oakleaf","rhssaf_uniform_m93_oakleaf_summer"
+];
+
+OT_clothes_police = ["U_I_G_resistanceLeader_F","U_BG_Guerilla2_1","U_BG_Guerilla2_3","U_I_C_Soldier_Para_4_F"];
+OT_vest_police = "V_TacVest_blk_POLICE";
+OT_hat_police = "H_Cap_police";
+OT_clothes_mob = "U_I_C_Soldier_Camo_F";
+
+OT_starterBackpacks = ["B_CivilianBackpack_01_Everyday_Astra_F","B_CivilianBackpack_01_Everyday_Black_F","B_CivilianBackpack_01_Everyday_Vrana_F","B_CivilianBackpack_01_Everyday_IDAP_F","B_CivilianBackpack_01_Sport_Blue_F","B_CivilianBackpack_01_Sport_Green_F","B_CivilianBackpack_01_Sport_Red_F"];
+
+//NATO stuff
+OT_NATO_HMG = "RHS_M2StaticMG_USMC_D";
+OT_NATO_Vehicles_AirGarrison = [
+	["RHS_CH_47F_light",1],
+	["B_Heli_Transport_01_F",1],
+	["RHS_AH1Z",1],
+	["RHS_UH1Y_FFAR_d",2]
+];
+OT_NATO_Vehicles_StaticAAGarrison = ["RHS_Stinger_AA_pod_USMC_D","RHS_Stinger_AA_pod_USMC_D","B_Radar_System_01_F","B_SAM_System_03_F"]; //Added to every airfield
+
+OT_NATO_Vehicles_JetGarrison = [
+	["B_Plane_Fighter_01_F",2]
+];
+
+OT_NATO_StaticGarrison_LevelOne = ["RHS_M2StaticMG_USMC_D","RHS_M2StaticMG_USMC_D","rhsusf_m1045_d_s","rhsusf_m1043_d_s_m2"];
+OT_NATO_StaticGarrison_LevelTwo = ["RHS_M2StaticMG_USMC_D","RHS_TOW_TriPod_USMC_D","RHS_MK19_TriPod_USMC_D","rhsusf_m1240a1_m2crows_usmc_d","rhsusf_m1240a1_mk19crows_usmc_d","B_AFV_Wheeled_01_cannon_F","RHS_M252_USMC_D","RHS_M2A2"];
+OT_NATO_StaticGarrison_LevelThree = ["RHS_TOW_TriPod_USMC_D","RHS_TOW_TriPod_USMC_D","RHS_Stinger_AA_pod_USMC_D","RHS_M2StaticMG_USMC_D","RHS_M2StaticMG_USMC_D","RHS_MK19_TriPod_USMC_D","rhsusf_m1240a1_m2crows_usmc_d","rhsusf_m1240a1_mk19crows_usmc_d","rhsusf_M1084A1R_SOV_M2_D_fmtv_socom","RHS_M252_USMC_D","rhsusf_m1a1fep_d","B_AFV_Wheeled_01_up_cannon_F","RHS_M2A3_BUSKI"];
+OT_NATO_StaticGarrison_HQ = ["RHS_TOW_TriPod_USMC_D","RHS_TOW_TriPod_USMC_D","RHS_Stinger_AA_pod_USMC_D","RHS_M2StaticMG_USMC_D","RHS_M2StaticMG_USMC_D","RHS_M2StaticMG_USMC_D","RHS_MK19_TriPod_USMC_D","rhsusf_m1240a1_m2crows_usmc_d","rhsusf_m1240a1_mk19crows_usmc_d","rhsusf_M1084A1R_SOV_M2_D_fmtv_socom","RHS_M252_USMC_D","B_MBT_01_TUSK_F","rhsusf_m1a2sep1tuskiid_usarmy","rhsusf_m1a2sep1tuskiid_usarmy","B_APC_Tracked_01_AA_F","B_APC_Tracked_01_AA_F","RHS_M2A3_BUSKIII","RHS_M2A3_BUSKIII"];
+
+
+OT_NATO_CommTowers = ["Land_TTowerBig_1_F","Land_TTowerBig_2_F"];
+
+OT_NATO_Unit_Sniper = "B_ghillie_ard_F";
+OT_NATO_Unit_Spotter = "B_spotter_F";
+OT_NATO_Unit_AA_spec = "B_soldier_AA_F";
+OT_NATO_Unit_AA_ass = "B_soldier_AAA_F";
+OT_NATO_Unit_AT_spec = "B_soldier_LAT2_F";
+OT_NATO_Unit_TeamLeader = "B_Soldier_TL_F";
+
+OT_NATO_Unit_PoliceCommander = "Com_Police_N";
+OT_NATO_Unit_Police = "Com_Police_N2";
+OT_NATO_Vehicle_PoliceHeli = "RHS_UH1Y_d";
+OT_NATO_Vehicle_Quad = "B_Quadbike_01_F";
+OT_NATO_Vehicle_Police = "rhsusf_m113d_usarmy_M240";
+OT_NATO_Vehicle_Transport = ["B_Truck_01_transport_F","B_Truck_01_covered_F","rhsusf_M1083A1P2_B_M2_D_fmtv_usarmy"];
+OT_NATO_Vehicle_Transport_Light = "B_LSV_01_unarmed_F";
+OT_NATO_Vehicles_PoliceSupport = ["rhsusf_m1025_d_s_m2","rhsusf_m1025_d_s_Mk19","rhsusf_CGRCAT1A2_M2_usmc_d","rhsusf_CGRCAT1A2_Mk19_usmc_d"];OT_NATO_Vehicles_PoliceSupport = selectRandom OT_NATO_Vehicles_PoliceSupport;
+OT_NATO_Vehicles_ReconDrone = "B_UAV_01_F";
+OT_NATO_Vehicles_CASDrone = "B_UAV_02_CAS_F";
+OT_NATO_Vehicles_AirSupport = ["B_Heli_Attack_01_F","RHS_AH64DGrey","RHS_AH1Z"];
+OT_NATO_Vehicles_AirSupport_Small = ["B_Heli_Light_01_armed_F","RHS_MELB_AH6M","RHS_UH1Y"];
+OT_NATO_Vehicles_GroundSupport = ["B_MRAP_01_gmg_F","B_MRAP_01_hmg_F","B_LSV_01_armed_F","rhsusf_m1240a1_mk19crows_usmc_d","rhsusf_m1240a1_m2crows_usmc_d"];
+OT_NATO_Vehicles_GroundPatrol = ["rhsusf_M1232_M2_usarmy_d","rhsusf_M1237_MK19_usarmy_d","rhsusf_stryker_m1126_m2_d","rhsusf_stryker_m1126_mk19_d"];//should have higher seating capacity
+OT_NATO_Vehicles_TankSupport = ["B_MBT_01_TUSK_F","B_MBT_01_cannon_F","rhsusf_m1a2sep1tuskiid_usarmy","rhsusf_m1a1aim_tuski_d","B_AFV_Wheeled_01_up_cannon_F"];
+OT_NATO_Vehicles_Convoy = ["B_UGV_01_rcws_F","B_MRAP_01_hmg_F","B_LSV_01_armed_F","B_LSV_01_armed_F","B_LSV_01_armed_F"];
+OT_NATO_Vehicles_AirWingedSupport = ["B_Plane_Fighter_01_F","B_Plane_CAS_01_F"];
+OT_NATO_Vehicle_AirTransport_Small = "RHS_UH1Y_d";
+OT_NATO_Vehicle_AirTransport = ["B_Heli_Transport_03_F","B_Heli_Transport_01_F","rhsusf_CH53E_USMC_GAU21_D"];
+OT_NATO_Vehicle_AirTransport_Large = "RHS_CH_47F_light";
+OT_NATO_Vehicle_Boat_Small = "B_Boat_Armed_01_minigun_F";
+OT_NATO_Vehicles_APC = ["B_APC_Wheeled_01_cannon_F","B_APC_Tracked_01_rcws_F","B_APC_Tracked_01_CRV_F","RHS_M2A3_BUSKIII","RHS_M6","B_AFV_Wheeled_01_cannon_F"];
+OT_NATO_Vehicle_HVT = "B_MRAP_01_F";
+OT_NATO_Vehicle_CTRGTransport = "B_CTRG_Heli_Transport_01_tropic_F";
+
+OT_NATO_Engineer = "rhsusf_army_ocp_engineer";//Added to crew space of infantry support vehicles
+OT_NATO_Vehicle_Support_Troop = "rhsusf_army_ocp_riflemanl";//Added to fill space of infantry support vehicles
+
+OT_NATO_Vehicles_VirArty = ["6Rnd_155mm_Mo_smoke","6Rnd_155mm_Mo_AT_mine"]; //Smoke and ATmines
+OT_NATO_Random_Statics = ["RHS_M2StaticMG_USMC_D","RHS_TOW_TriPod_USMC_D"];
+
+//New special force that comes midgame when base has been attacked
+OT_NATO_APCBrigade_Lead = "rhsusf_usmc_recon_marpat_d_teamleader_lite";
+OT_NATO_APCBrigade_Vehicles = ["RHS_M2A3_BUSKIII","RHS_M2A3_BUSKIII"];
+OT_NATO_APCBrigade_Infantry = ["rhsusf_socom_marsoc_cso_grenadier","rhsusf_socom_marsoc_marksman","rhsusf_socom_marsoc_sarc","rhsusf_socom_marsoc_sniper_m107","rhsusf_socom_marsoc_cso_mk17"];//Squad Per Vehicle
+
+//New to allow for specialized weaponery
+OT_NATO_ReinforcementsLead = "B_recon_TL_F";
+OT_NATO_Reinforcements = ["B_recon_exp_F","B_recon_JTAC_F","B_recon_M_F","B_recon_medic_F","B_recon_F","B_recon_LAT_F","B_Recon_Sharpshooter_F","B_ghillie_sard_F","B_Patrol_Soldier_AR_F","B_Patrol_Soldier_MG_F"]; //Troops that come to assist police/ run checkpoints
+
+OT_NATO_GarrisonLead = "rhsusf_usmc_marpat_d_teamleader";
+OT_NATO_Garrison = ["rhsusf_usmc_marpat_d_smaw","rhsusf_usmc_marpat_d_stinger","rhsusf_usmc_marpat_d_javelin","rhsusf_usmc_marpat_d_autorifleman_m249","rhsusf_usmc_marpat_d_marksman","rhsusf_usmc_marpat_d_grenadier","rhsusf_usmc_marpat_d_sniper_m107","rhsusf_usmc_marpat_d_machinegunner","rhsusf_usmc_marpat_d_rifleman_light","rhsusf_usmc_marpat_d_riflemanat","rhsusf_usmc_marpat_d_rifleman_m4","rhsusf_usmc_marpat_d_grenadier_m32"]; //Troops that gaurd objectives/bases
+OT_NATO_ArmyLead = ["B_Soldier_TL_F"];
+OT_NATO_Army = [
+	["B_soldier_AR_F","B_medic_F","B_soldier_exp_F","B_Soldier_GL_F","B_Patrol_Soldier_MG_F","B_soldier_M_F","B_Soldier_F","B_soldier_LAT_F","B_soldier_LAT2_F","B_Soldier_lite_F","B_Sharpshooter_F","B_ghillie_ard_F"]
+]; //Troops that are sent to battle for towns/bases
+OT_NATO_ArmyBaseGroup = [//Attacking squads always have these troops gaurenteed in them (+ squadleader)
+	["B_soldier_AA_F","B_soldier_AT_F","B_soldier_AR_F","B_medic_F"]
+];
+
+
+OT_NATO_ReinforcementsWep = ["arifle_MXC_F","SMG_03C_camo","SMG_01_F","rhs_weap_m4_carryhandle","rhs_weap_m4","rhsusf_weap_MP7A2_desert","rhs_weap_g36c"];
+OT_NATO_ReinforcementsWepGL = ["rhs_weap_m4_carryhandle_m203S"];
+OT_NATO_ReinforcementsWepMG = ["arifle_MX_SW_F","LMG_Mk200_F"];
+OT_NATO_ReinforcementsWepSR = ["rhs_weap_m24sws_d","rhs_weap_m40a5_d","rhs_weap_m76","arifle_MXM_F","srifle_DMR_02_sniper_F"];
+
+OT_NATO_GarrisonWep = ["rifle_EBR_F","arifle_MX_F","arifle_MX_SW_F","arifle_MXM_F","srifle_DMR_06_camo_F","srifle_DMR_02_sniper_F","srifle_DMR_03_tan_F","arifle_SPAR_02_snd_F","rhs_weap_m14_ris_d","rhs_weap_m27iar_grip","rhs_weap_m4a1_carryhandle","rhs_weap_m4a1_blockII_d","rhs_weap_m4a1_d","rhs_weap_sr25_d","rhs_weap_mk17_STD","rhs_weap_mk17_LB","rhs_weap_mk18_d","rhs_weap_m14ebrri"];
+OT_NATO_GarrisonWepGL = ["arifle_MX_GL_F","rhs_weap_m4a1_blockII_M203_d","rhs_weap_m4_m320","rhs_weap_m32","rhs_weap_m4_carryhandle_m203","rhs_weap_m16a4_carryhandle_M203"];
+OT_NATO_GarrisonWepMG = ["MMG_01_tan_F","MMG_02_sand_F","rhs_weap_m240G","rhs_weap_m249_pip_L","rhs_weap_m240B","LMG_Zafir_F"];
+OT_NATO_GarrisonWepSR = ["srifle_LRR_camo_F","rhs_weap_XM2010_d","rhs_weap_M107_d"];
+
+OT_NATO_ArmyWep = ["arifle_MX_F","arifle_MXC_F","srifle_EBR_F","arifle_MXM_F","rhs_weap_m4a1_carryhandle","rhs_weap_m4a1_blockII_d","rhs_weap_m16a4_carryhandle","rhs_weap_g36kv","rhs_weap_m4a1_d_mstock"];
+OT_NATO_ArmyWepGL = ["arifle_MX_GL_F","rhs_weap_m4a1_carryhandle_m203","rhs_weap_m4a1_blockII_M203_d","rhs_weap_m16a4_carryhandle_M203","rhs_weap_g36kv_ag36"];
+OT_NATO_ArmyWepMG = ["LMG_Mk200_F","arifle_MX_SW_F","rhs_weap_m249","rhs_weap_m249_light_S"];
+OT_NATO_ArmyWepSR = ["srifle_DMR_03_tan_F","rhs_weap_m40a5_d","rhs_weap_XM2010_d","arifle_SPAR_03_snd_F"];
+
+OT_ALL_NATOAR = OT_NATO_ReinforcementsWep + OT_NATO_GarrisonWep +  OT_NATO_ArmyWep;
+OT_ALL_NATOGL = OT_NATO_ArmyWepGL + OT_NATO_GarrisonWepGL + OT_NATO_ReinforcementsWepGL;
+OT_ALL_NATOMG = OT_NATO_ReinforcementsWepMG + OT_NATO_GarrisonWepMG + OT_NATO_ArmyWepMG;
+OT_ALL_NATOSR = OT_NATO_ReinforcementsWepSR + OT_NATO_GarrisonWepSR + OT_NATO_ArmyWepSR + ["rhs_weap_M107_leu"];
+
+OT_NATO_weapons_Police = ["SMG_03_camo","rhs_weap_savz61","SMG_02_F","SMG_05_F","hgun_PDW2000_F","rhs_weap_pp2000","rhs_weap_M590_8RD"];
+OT_NATO_Goggles_Police = ["G_Aviator","G_Bandanna_aviator","G_Bandanna_sport","G_Bandanna_shades","G_Shades_Blue","G_Shades_Black","G_Squares_Tinted","G_Squares","G_Bandanna_blk"];
+
+OT_NATO_weapons_Pistols = ["hgun_Pistol_heavy_01_F","hgun_ACPC2_F","hgun_P07_F","rhsusf_weap_m9","rhs_weap_cz99","rhsusf_weap_m1911a1"];
+
+OT_NATO_GroundForces = []; // Don't touch
+
+OT_NATOBluprints = ["B_Truck_01_fuel_F","B_Truck_01_box_F","B_Truck_01_ammo_F","B_Truck_01_transport_F","B_Truck_01_covered_F","B_LSV_01_unarmed_F","B_LSV_01_AT_F","B_LSV_01_armed_F","B_Quadbike_01_F","B_MRAP_01_F","B_MRAP_01_gmg_F","B_MRAP_01_hmg_F","B_Heli_Light_01_dynamicLoadout_F","B_Heli_Transport_03_unarmed_F","B_APC_Wheeled_01_cannon_F","B_Boat_Armed_01_minigun_F","B_CTRG_LSV_01_light_F","rhsusf_m1025_d_m2","rhsusf_m1025_d_Mk19","rhsusf_m1025_d","rhsusf_m1045_d","RHS_CH_47F_light","rhsusf_M1117_D","rhsusf_M1220_usarmy_d","rhsusf_M1220_M2_usarmy_d","rhsusf_M1078A1P2_D_fmtv_usarmy","rhsusf_M977A4_AMMO_BKIT_usarmy_d","rhsusf_M977A4_REPAIR_usarmy_d","rhsusf_M978A4_usarmy_d","rhsusf_m998_d_s_2dr_fulltop","RHS_UH1Y_UNARMED_d","RHS_UH1Y_d"]; //List of blueprints player can get from laptop
+
+OT_CRIM_Weapons = ["rhs_weap_ak74","rhs_weap_ak74_3","rhs_weap_ak74_2","rhs_weap_ak74n","rhs_weap_akm","rhs_weap_akmn","rhs_weap_akms","rhs_weap_aks74","rhs_weap_aks74u","srifle_DMR_06_hunter_F","arifle_AKM_F","arifle_AKS_F","rhs_weap_m1garand_sa43","rhs_weap_savz58v","rhs_weap_savz58p","rhs_weap_m70b3n","rhs_weap_m21a","rhs_weap_ak104","rhs_weap_ak105","rhs_weap_ak74m_desert"];
+OT_CRIM_Pistols = ["rhs_weap_6p53","rhs_weap_pb_6p9","hgun_Pistol_heavy_02_F","hgun_Pistol_01_F","rhs_weap_makarov_pm","rhs_weap_tt33","rhs_weap_cz99_etched","hgun_Rook40_F","rhs_weap_type94_new","hgun_P07_blk_F"];
+OT_CRIM_Launchers = ["rhs_weap_panzerfaust60","rhs_weap_rpg18","rhs_weap_rshg2","rhs_weap_rpg26","rhs_weap_rpg75","rhs_weap_m80"];
+
+OT_Forced_Weapons = []; // Forces the game to detect these classes,mainly for weapons with 'MissileLauncher' as a parent
+
+//Check for mods, if yes then update
+private _append = [];
+if (OT_hasNI) then {
+
+		_append = ["hlc_rifle_ak47","hlc_rifle_ak12","hlc_rifle_aku12","hlc_rifle_ak74_dirty","hlc_rifle_akm","hlc_rifle_aks74","hlc_rifle_aks74u","hlc_rifle_aek971worn","hlc_rifle_RK62","hlc_rifle_rpk","hlc_rifle_rpk74n","hlc_rifle_STGW57","hlc_rifle_RPK12","hlc_rifle_M1941LMG","hlc_wp_MK17IUR_762R"];
+	OT_CRIM_Weapons append _append;
+	
+		_append = ["hlc_pistol_C96_Wartime_Worn","hlc_Pistol_P228","hlc_pistol_P226WestGerman","hlc_pistol_M712_worn_stock"];
+	OT_CRIM_Pistols append _append;
+	
+		_append = ["hlc_pistol_P226R_357Elite","hlc_pistol_P229R_Combat","hlc_pistol_P239_40","hlc_pistol_Mk25D"];
+	OT_NATO_weapons_Pistols append _append;
+	
+		_append = ["hlc_smg_mp5a4","hlc_smg_mp5sd5","hlc_rifle_augpara_t","hlc_rifle_auga2para_t","hlc_rifle_saiga12k","hlc_rifle_vendimus","hlc_rifle_augsrcarb_t","hlc_rifle_SG550Sniper"];
+	OT_NATO_weapons_Police append _append;
+
+		_append = ["hlc_wp_m16A1","hlc_wp_m16a2","hlc_rifle_hk33ka3","hlc_rifle_hk33a2RIS","hlc_rifle_416D10C","hlc_mp510_tac","hlc_wp_xm4","hlc_rifle_auga1carb_t","hlc_wp_XM177E2","hlc_rifle_G36C","hlc_rifle_SG553SB","hlc_wp_mod733","hlc_wp_SCARL_STD_300AAC_SRX_muddy"];
+	OT_NATO_ReinforcementsWep append _append;
+	
+		_append = ["hlc_rifle_FN3011Modern_camo","hlc_rifle_M1903A1_unertl","hlc_WP_SSR"];
+	OT_NATO_ReinforcementsWepSR append _append;
+	
+		_append = ["hlc_lmg_m60","hlc_rifle_MG36"];
+	OT_NATO_ReinforcementsWepMG append _append;
+
+		_append = ["hlc_rifle_Bushmaster300","hlc_rifle_g3sg1ris","hlc_rifle_G36A1","hlc_rifle_416D20_tan","hlc_rifle_M14dmr_Rail","hlc_rifle_M21_Rail","hlc_wp_m16a2","hlc_rifle_SG551LB_TAC","hlc_rifle_SLR","hlc_rifle_G36V","hlc_rifle_ACR68_full_tan","hlc_wp_xm4","hlc_rifle_g3a3vris","hlc_rifle_C2A1","hlc_wp_SCARH_STD","hlc_rifle_FAL5000Rail","hlc_rifle_falosw"];
+	OT_NATO_GarrisonWep append _append;
+	
+		_append = ["hlc_rifle_awmagnum_FDE","hlc_rifle_psg1","hlc_rifle_m14sopmod"];
+	OT_NATO_GarrisonWepSR append _append;
+	
+		_append = ["HLC_Rifle_g3ka4_GL","hlc_rifle_osw_GL"];
+	OT_NATO_GarrisonWepGL append _append;
+	
+		_append = ["hlc_lmg_M249E2","hlc_lmg_mk48mod1","hlc_lmg_MG3KWS","hlc_lmg_M60E4","hlc_lmg_MG42KWS_t"];
+	OT_NATO_GarrisonWepMG append _append;
+	
+	_append = ["hlc_rifle_FAL5061Rail","hlc_rifle_RU556","hlc_WP_SCARH_CQC","hlc_rifle_M4a1carryhandle","hlc_rifle_G36MLIC","hlc_rifle_G36KMLIC","hlc_rifle_416D165_tan","hlc_wp_SCARL_STD","hlc_rifle_mk18mod0","hlc_rifle_ACR_MID_tan","hlc_rifle_CQBR","hlc_rifle_416D145_CAG","hlc_wp_SCARH_CQC_SRX_tranoflage","hlc_rifle_M27IAR","hlc_rifle_auga3_bl","hlc_rifle_bcmjack"];
+	{
+		OT_NATO_ArmyWep pushback _x;
+	}foreach(_append);
+	
+	_append = ["hlc_lmg_minimipara","hlc_lmg_mk46mod1","hlc_m249_SQuantoon"];
+	
+	{
+		OT_NATO_ArmyWepMG pushback _x;
+	}foreach(_append);
+	
+	_append = ["hlc_rifle_FN3011Tactical_green","hlc_WP_SCARH_DMR"];
+	
+	{
+		OT_NATO_ArmyWepSR pushback _x;
+	}foreach(_append);
+	
+	_append = ["hlc_rifle_A1m203","hlc_rifle_m203","hlc_rifle_G36MLIAG36","hlc_rifle_auga3_GL_BL"];
+	
+	{
+		OT_NATO_ArmyWepGL pushback _x;
+	}foreach(_append);
+};
+
+if (isClass(configfile >> "CfgPatches" >> "bwa3_weapons")) then { //BWMOD
+	private _append = ["BWA3_Tiger_RMK_Universal"];
+	
+	{
+		OT_NATO_Vehicles_AirSupport pushback _x;
+	}foreach(_append);
+	
+	_append = ["BWA3_Eagle_FLW100_Tropen"];
+	
+	{
+		OT_NATO_Vehicles_GroundSupport pushback _x;
+	}foreach(_append);
+	
+	_append = ["BWA3_Puma_Tropen"];
+	
+	{
+		OT_NATO_Vehicles_APC pushback _x;
+	}foreach(_append);
+	
+	_append = ["BWA3_Leopard2_Tropen"];
+	
+	{
+		OT_NATO_Vehicles_TankSupport pushback _x;
+	}foreach(_append);
+	
+	_append = [["BWA3_TL_Tropen","BWA3_MachineGunner_MG5_Tropen","BWA3_Marksman_Tropen","BWA3_Grenadier_G27_Tropen","BWA3_Grenadier_Tropen","BWA3_RiflemanAT_PzF3_Tropen","BWA3_RiflemanAT_RGW90_Tropen","BWA3_Rifleman_Tropen"]];
+	
+	{
+		OT_NATO_GroundForces pushback _x;
+	}foreach(_append);
+	
+	_append = ["BWA3_G27_tan","BWA3_G28","BWA3_G29","BWA3_G36A3_tan","BWA3_G36A2_tan","BWA3_G36A3_tan","BWA3_G38_tan"];
+	
+	{
+		OT_NATO_GarrisonWep pushback _x;
+	}foreach(_append);
+	
+	_append = ["BWA3_G82","BWA3_G29"];
+	
+	{
+		OT_NATO_GarrisonWepSR pushback _x;
+	}foreach(_append);
+	
+	_append = ["BWA3_MG5_tan","BWA3_MG3"];
+	
+	{
+		OT_NATO_GarrisonWepMG pushback _x;
+	}foreach(_append);
+	
+	_append = ["BWA3_G27_tan","BWA3_G28","BWA3_G29","BWA3_G36A3_tan","BWA3_G36A2_tan","BWA3_G36A3_tan","BWA3_G38_tan"];
+	
+	{
+		OT_NATO_ArmyWep pushback _x;
+	}foreach(_append);
+	
+	_append = ["BWA3_G29"];
+	
+	{
+		OT_NATO_ArmyWepSR pushback _x;
+	}foreach(_append);
+	
+	_append = ["BWA3_MG4"];
+	
+	{
+		OT_NATO_ArmyWepMG pushback _x;
+	}foreach(_append);
+	
+};
+
+if(OT_hasFW) then {
+		_append = ["sp_fwa_smg_mp40","sp_fwa_mas_49_56","sp_fwa_fn_modelDA1","sp_fwa_fn49_arg","sp_fwa_m1918a2_bar","sp_fwa_ar18_shorty","sp_fwa_ar10_porto_alu","sp_fwa_ar15_603_m16a1_captured","sp_fwa_fal_factory_50_63","sp_fwa_sig510_3","sp_fwa_smg_mp40_black","sp_fwa_stg44","sp_fwa_bren_mk2","sp_fwa_fm2429","sp_fwa_ruger_mini14_ac556","sp_fwa_bm59_mk3_alpine"];
+	OT_CRIM_Weapons append _append;
+	
+		_append = ["sp_fwa_l9a1_hipower_wood"];
+	OT_CRIM_Pistols append _append;
+	
+		_append = ["sp_fwa_l9a1_hipower"];
+	OT_NATO_weapons_Pistols append _append;
+	
+		_append = ["sp_fwa_enfield_l42_walnut","sp_fwa_enfield_l8_walnut","sp_fwa_smg_carlg_m45","sp_fwa_smg_portsaid_m45","sp_fwa_smg_mk5sterling","sp_fwa_smg_mk6sterling","sp_fwa_smg_mk7a8sterling_stock_beech","sp_fwa_m2a1_carbine","sp_fwa_smg_thompson_m1a1","sp_fwa_smg_mat49","sp_fwa_ruger_mini14"];
+	OT_NATO_weapons_Police append _append;
+	
+		_append = ["sp_fwa_smg_thompson_m1928a1"];
+	OT_NATO_ReinforcementsWep append _append;
+
+		_append = ["sp_fwa_ar10","sp_fwa_ar15_606_hbar","sp_fwa_ar15_646_a3","sp_fwa_fal_stg58_fn"];
+	OT_NATO_ArmyWep append _append;
+	
+		_append = ["sp_fwa_mag58","sp_fwa_aa52","sp_fwa_mg4259"];
+	OT_NATO_ArmyWepMG append _append;
+	
+		_append = ["sp_fwa_m14"];
+	OT_NATO_ArmyWepSR append _append;
+	
+		_append = ["sp_fwa_ar15_646_m16a3_m203"];
+	OT_NATO_ArmyWepGL append _append;
+	
+		_append = ["sp_fwa_m1919a6_browning"];
+	OT_NATO_GarrisonWepMG append _append;
+	
+		_append = ["sp_fwa_m72a1_law_loaded","sp_fwa_m67","sp_fwa_m2_carlGustav_no78"];
+	OT_Forced_Weapons append _append;
+};
+
+if (isClass(configfile >> "CfgPatches" >> "A3_Weapons_F_Aegis_LongRangeRifles_DMR_01")) then { //Aegis
+	_append = ["B_A_MRAP_03_gmg_F","B_A_MRAP_03_hmg_F"];
+	
+	{
+		OT_NATO_Vehicles_GroundSupport pushback _x;
+	}foreach(_append);
+	
+	_append = ["B_A_APC_tracked_03_cannon_F"];
+	
+	{
+		OT_NATO_Vehicles_APC pushback _x;
+	}foreach(_append);
+	
+	_append = [["B_A_Soldier_TL_F","B_A_Soldier_AR_F","B_A_soldier_M_F","B_A_Soldier_GL_F","B_A_Medic_F","B_A_Soldier_AT_F","B_A_RadioOperator_F","B_A_Soldier_F"]];
+	
+	{
+		OT_NATO_GroundForces pushback _x;
+	}foreach(_append);
+	
+	_append = ["arifle_SA80_snd_F"];
+	
+	{
+		OT_NATO_GarrisonWep pushback _x;
+	}foreach(_append);
+	
+	_append = ["srifle_WF50_F"];
+	
+	{
+		OT_NATO_GarrisonWepSR pushback _x;
+	}foreach(_append);
+	
+	_append = ["arifle_SA80_C_snd_F"];
+	
+	{
+		OT_NATO_ArmyWep pushback _x;
+	}foreach(_append);
+	
+	_append = ["LMG_Mk200_plain_F"];
+	
+	{
+		OT_NATO_ArmyWepMG pushback _x;
+	}foreach(_append);
+	
+	_append = ["SMG_04_snd_F","sgun_M4_F"];
+	
+	{
+		OT_NATO_ReinforcementsWep pushback _x;
+	}foreach(_append);
+	
+	_append = ["SMG_05_snd_F","sgun_Mp153_classic_F"];
+	
+	{
+		OT_NATO_weapons_Police pushback _x;
+	}foreach(_append);
+	
+};
+
+private _GetParam = [0, 1] select (paramsArray select 9);
+if (_GetParam IsEqualTo 1) then {HCEnabled = true};
+_GetParam = [0, 1] select (paramsArray select 10);
+if (_GetParam IsEqualTo 1) then {AllowAirD = true};
+_GetParam = [0, 1, 2] select (paramsArray select 11);
+server setvariable ["PDT",_GetParam,true];
+_GetParam = [0, 1, 2] select (paramsArray select 12);
+server setvariable ["OT_Despawn",_GetParam,true];
+
+//Criminal stuff
+OT_CRIM_Unit = "C_man_p_fugitive_F";
+OT_CRIM_Clothes = ["U_I_C_Soldier_Bandit_3_F","U_BG_Guerilla3_1","U_C_HunterBody_grn","U_I_G_Story_Protagonist_F","eo_shirt_tigerblu","eo_shirt_tigerblk","rhs_uniform_6sh122_gloves_v2","rhs_uniform_6sh122_gloves_v1","rhs_uniform_emr_des_patchless",
+"rhs_uniform_emr_patchless","rhs_uniform_flora_patchless","rhs_uniform_gorka_r_g_gloves","rhs_uniform_gorka_1_b","rhs_uniform_mvd_izlom","rhs_uniform_afghanka_boots_moldovan_ttsko_hot","rhs_uniform_mflora_patchless","rhs_uniform_vkpo_gloves",
+"U_I_L_Uniform_01_camo_F","U_I_L_Uniform_01_deserter_F","rhssaf_uniform_mig29_pilot","rhssaf_uniform_m10_digital","rhssaf_uniform_m10_digital_desert","rhssaf_uniform_m10_digital_summer","rhssaf_uniform_m10_digital_tan_boots"
+];
+OT_CRIM_Goggles = ["G_Balaclava_blk","G_Balaclava_combat","G_Balaclava_lowprofile","G_Balaclava_oli","G_Bandanna_blk","G_Bandanna_khk","G_Bandanna_oli","G_Bandanna_shades","G_Bandanna_sport","G_Bandanna_tan"];
+
+OT_piers = ["Land_PierConcrete_01_4m_ladders_F","Land_PierWooden_01_platform_F","Land_PierWooden_01_hut_F","Land_PierWooden_02_hut_F"]; //spawns dudes that sell boats n stuff
+OT_offices = ["Land_MultistoryBuilding_01_F","Land_MultistoryBuilding_04_F"];
+OT_portBuildings = ["Land_Warehouse_01_F","Land_Warehouse_02_F","Land_ContainerLine_01_F","Land_ContainerLine_02_F","Land_ContainerLine_03_F"];
+OT_airportTerminals = ["Land_Airport_01_terminal_F","Land_Airport_02_terminal_F","Land_Hangar_F"];
+OT_portBuilding = "Land_WarehouseShelter_01_F";
+OT_policeStation = "Land_Cargo_House_V3_F";
+OT_warehouse = "Land_Warehouse_03_F";
+OT_warehouses = [OT_warehouse,"Land_dp_smallFactory_F","Land_i_Shed_Ind_F"];
+OT_barracks = "Land_Barracks_01_grey_F";
+OT_workshopBuilding = "Land_GarageRow_01_small_F";
+OT_refugeeCamp = "Land_Caravan_01_green_F";//changed by Gerhart aka PapaGee
+OT_trainingCamp = "Land_IRMaskingCover_02_F";
+OT_hardwareStore = "Land_dp_smallFactory_F";
+OT_radarBuilding = "Land_Radar_Small_F";
+OT_Jammer = "Land_dp_transformer_F";
+
+//Custom recruitables per mission
+OT_Recruitables = [
+    //Rifleman
+	["I_soldier_F",[
+        ["srifle_DMR_06_hunter_F","","","optic_Holosight_lush_F",["10Rnd_Mk14_762x51_Mag",10],[],""],
+        [],
+        ["hgun_Pistol_heavy_01_F","","","",["11Rnd_45ACP_Mag",11],[],""],
+        ["eo_bandit",[["ACE_morphine",1],["ACE_epinephrine",1],["ACE_fieldDressing",2]]],
+        ["U_I_C_Soldier_Para_4_F",[["HandGrenade",2,1],["11Rnd_45ACP_Mag",4,11],["MiniGrenade",4,1]]],
+        ["eo_legstrappack_2",[["10Rnd_Mk14_762x51_Mag",6,10]]],
+        "H_Hat_tan","eo_bandana_2",
+        [],
+        ["ItemMap","","ItemRadio","ItemCompass","ItemWatch",""]]
+    ],
+    //Autorifleman
+	["I_Soldier_AR_F",[
+        ["rhs_weap_MP44","","","",["rhsgref_30Rnd_792x33_SmE_StG",30],[],""],
+        [],
+        ["hgun_Pistol_heavy_01_F","","","",["11Rnd_45ACP_Mag",11],[],""],
+        ["eo_diamond_1",[["FirstAidKit",1],["ACE_fieldDressing",5],["ACE_epinephrine",2],["ACE_morphine",2],["SmokeShell",2,1],
+        ["rhs_mag_rgn",2,1],["rhsgref_25Rnd_792x33_SmE_StG",3,25],["11Rnd_45ACP_Mag",1,11]]],
+		["U_I_C_Soldier_Para_1_F",[["HandGrenade",2,1],["11Rnd_45ACP_Mag",4,11],["MiniGrenade",4,1]]],
+		["eo_messengerbag_1",[["rhsgref_25Rnd_792x33_SmE_StG",3,25],["rhs_grenade_nbhgr39_mag",1,1],["rhs_grenade_nbhgr39B_mag",1,1]]],
+		"H_Hat_brown","eo_balaclava_1",
+		[],
+		["ItemMap","","ItemRadio","ItemCompass","ItemWatch",""]]
+    ],
+    //Rifleman (AT)
+	["I_Soldier_LAT_F",[
+        ["rhsusf_weap_MP7A2_desert","","","",["rhsusf_mag_40Rnd_46x30_FMJ",40],[],""],
+		["rhs_weap_rpg18","","","",["rhs_rpg18_mag",1],[],""],
+		["hgun_Pistol_heavy_01_F","","","",["11Rnd_45ACP_Mag",11],[],""],
+		["eo_paramilitary_1",[["FirstAidKit",1],["ACE_fieldDressing",5],["ACE_epinephrine",2],["ACE_morphine",2],["SmokeShell",2,1],["11Rnd_45ACP_Mag",2,11],["rhsusf_mag_40Rnd_46x30_FMJ",1,40]]],
+		["V_BandollierB_khk",[["11Rnd_45ACP_Mag",2,11],["rhsusf_mag_40Rnd_46x30_FMJ",9,40]]],
+		["eo_field",[["rhs_grenade_nbhgr39_mag",1,1],["rhs_grenade_nbhgr39B_mag",1,1]]],
+		"H_Hat_camo","eo_balaclava_1",
+		[],
+		["ItemMap","","ItemRadio","ItemCompass","ItemWatch",""]]
+    ],
+    //Marksman
+	["I_Soldier_M_F",[
+        ["srifle_DMR_06_hunter_F","","","optic_Hamr",["10Rnd_Mk14_762x51_Mag",10],[],""],
+		[],
+		["hgun_Pistol_heavy_01_F","","","",["11Rnd_45ACP_Mag",11],[],""],
+		["eo_shirt_tigerblk",[["ACE_fieldDressing",4],["ACE_epinephrine",2],["ACE_morphine",2],["11Rnd_45ACP_Mag",5,11]]],
+		["V_Pocketed_coyote_F",[["20Rnd_762x51_Mag",6,20]]],
+		["eo_legstrappack_4",[["20Rnd_762x51_Mag",2,20],["HandGrenade",1,1],["SmokeShell",1,1]]],
+		"H_Hat_brown","eo_balaclavaLow_3",
+		[],
+		["ItemMap","","ItemRadio","ItemCompass","ItemWatch",""]]
+    ],
+    //Sniper
+	["I_Sniper_F",[
+        ["rhs_weap_m38_rail","","","optic_KHS_old",["rhsgref_5Rnd_762x54_m38",5],[],""],
+		[],
+		["rhsusf_weap_glock17g4","","","",["rhsusf_mag_17Rnd_9x19_JHP",17],[],""],
+		["U_I_C_Soldier_Para_4_F",[["ACE_fieldDressing",4],["ACE_epinephrine",2],["ACE_morphine",2],["rhsusf_mag_17Rnd_9x19_FMJ",2,17]]],
+		["V_Pocketed_coyote_F",[["rhsusf_mag_17Rnd_9x19_FMJ",1,17],["rhsgref_5Rnd_762x54_m38",15,5],["SmokeShell",2,1],["HandGrenade",2,1]]],
+		["eo_messengerbag_1",[["rhsusf_mag_17Rnd_9x19_FMJ",2,17],["rhsgref_5Rnd_762x54_m38",5,5]]],
+		"H_Hat_tan","eo_balaclavaLow_3",
+		[],
+		["ItemMap","","ItemRadio","ItemCompass","ItemWatch",""]]
+    ],
+    //Spotter
+	["I_Spotter_F",[
+        ["srifle_DMR_06_hunter_F","","","optic_Holosight_blk_F",["10Rnd_Mk14_762x51_Mag",10],[],""],
+		[],
+		["rhsusf_weap_glock17g4","","","",["rhsusf_mag_17Rnd_9x19_JHP",17],[],""],
+		["eo_camo",[["ACE_fieldDressing",4],["ACE_epinephrine",2],["ACE_morphine",2],["rhsusf_mag_17Rnd_9x19_FMJ",4,17],["10Rnd_Mk14_762x51_Mag",7,10]]],
+		["V_Pocketed_coyote_F",[["rhsusf_mag_17Rnd_9x19_FMJ",1,17],["SmokeShell",2,1],["HandGrenade",2,1],["10Rnd_Mk14_762x51_Mag",3,10]]],
+		["eo_legstrappack_4",[["rhsusf_mag_17Rnd_9x19_FMJ",2,17],["SmokeShell",4,1]]],
+		"H_Hat_tan","eo_bandana_3",
+		["Binocular","","","",[],[],""],
+		["ItemMap","","ItemRadio","ItemCompass","ItemWatch",""]]
+    ],
+    //Squad Leader
+	["I_Soldier_SL_F",[
+        ["srifle_DMR_06_hunter_F","","","optic_Holosight_blk_F",["10Rnd_Mk14_762x51_Mag",10],[],""],
+		[],
+		["rhsusf_weap_glock17g4","","","",["rhsusf_mag_17Rnd_9x19_JHP",17],[],""],
+		["eo_independant_1",[["ACE_fieldDressing",4],["ACE_epinephrine",2],["ACE_morphine",2],["rhsusf_mag_17Rnd_9x19_FMJ",4,17],["10Rnd_Mk14_762x51_Mag",7,10]]],
+		["V_Pocketed_coyote_F",[["rhsusf_mag_17Rnd_9x19_FMJ",1,17],["SmokeShell",2,1],["HandGrenade",2,1],["10Rnd_Mk14_762x51_Mag",3,10]]],
+		["eo_legstrappack_4",[["rhsusf_mag_17Rnd_9x19_FMJ",2,17],["SmokeShell",4,1]]],
+		"H_Hat_tan","eo_bandana_3",
+		["Binocular","","","",[],[],""],
+		["ItemMap","","ItemRadio","ItemCompass","ItemWatch",""]]
+    ],
+    //Medic
+	["I_Medic_F",[
+        ["rhsusf_weap_MP7A2_desert","","","optic_Holosight_smg_blk_F",["rhsusf_mag_40Rnd_46x30_FMJ",40],[],""],
+		[],
+		["rhsusf_weap_glock17g4","","","",["rhsusf_mag_17Rnd_9x19_JHP",17],[],""],
+		["eo_hoodie_blue",[["ACE_fieldDressing",4],["ACE_epinephrine",2],["ACE_morphine",2],["rhsusf_mag_17Rnd_9x19_FMJ",4,17],["rhsusf_mag_17Rnd_9x19_JHP",2,17]]],
+		["eo_legstrappack_2",[["rhsusf_mag_17Rnd_9x19_FMJ",2,17],["SmokeShell",4,1],["rhsusf_mag_40Rnd_46x30_FMJ",5,40]]],
+		["eo_field",[["ACE_bloodIV",4],["ACE_epinephrine",8],["ACE_fieldDressing",10]]],
+		"H_Hat_tan","eo_respirator_1",
+		[],
+		["ItemMap","","ItemRadio","ItemCompass","ItemWatch",""]]
+    ],
+    //AT
+	["I_Soldier_AT_F",[
+        ["rhsusf_weap_MP7A2_desert","","","optic_Holosight_smg_blk_F",["rhsusf_mag_40Rnd_46x30_FMJ",40],[],""],
+		["rhs_weap_rpg7","","","",["rhs_rpg7_PG7V_mag",1],[],""],
+		["rhsusf_weap_glock17g4","","","",["rhsusf_mag_17Rnd_9x19_JHP",17],[],""],
+		["eo_survivor_1",[["ACE_fieldDressing",4],["ACE_epinephrine",2],["ACE_morphine",2],["rhsusf_mag_17Rnd_9x19_FMJ",4,17],["rhsusf_mag_40Rnd_46x30_FMJ",5,40]]],
+		["eo_legstrappack_2",[["rhsusf_mag_40Rnd_46x30_FMJ",5,40],["rhs_grenade_anm8_mag",2,1],["rhs_charge_tnt_x2_mag",2,1]]],
+		["eo_carryall_2",[["RPG7_F",4,1],["rhs_rpg7_TBG7V_mag",2,1]]],
+		"H_Hat_tan","eo_bandana_4",
+		[],
+		["ItemMap","","ItemRadio","ItemCompass","ItemWatch",""]]
+    ],
+    //AA
+	["I_Soldier_AA_F",[
+        ["rhsusf_weap_MP7A2_desert","","","optic_Holosight_smg_blk_F",["rhsusf_mag_40Rnd_46x30_FMJ",40],[],""],
+		["rhs_weap_rpg7","","","",["rhs_rpg7_PG7V_mag",1],[],""],
+		["rhsusf_weap_glock17g4","","","",["rhsusf_mag_17Rnd_9x19_JHP",17],[],""],
+		["eo_shirt_stripe",[["ACE_fieldDressing",4],["ACE_epinephrine",2],["ACE_morphine",2],["rhsusf_mag_17Rnd_9x19_FMJ",4,17],["rhsusf_mag_40Rnd_46x30_FMJ",2,40]]],
+		["eo_legstrappack_2",[["rhsusf_mag_40Rnd_46x30_FMJ",5,40],["rhs_grenade_anm8_mag",2,1],["rhs_charge_tnt_x2_mag",2,1]]],
+		["eo_carryall_2",[["RPG7_F",2,1],["rhs_rpg7_PG7VR_mag",2,1],["rhs_rpg7_type69_airburst_mag",3,1]]],
+		"H_Hat_tan","eo_bandana_4",
+		[],
+		["ItemMap","","ItemRadio","ItemCompass","ItemWatch",""]]
+    ],
+    //Assistant AT
+	["I_Soldier_AAT_F",[
+        ["rhsusf_weap_MP7A2_aor1","","","optic_Holosight_smg_blk_F",["rhsusf_mag_40Rnd_46x30_FMJ",40],[],""],
+		[],
+		["rhsusf_weap_glock17g4","","","",["rhsusf_mag_17Rnd_9x19_JHP",17],[],""],
+		["eo_hoodie_grey",[["ACE_fieldDressing",4],["ACE_epinephrine",2],["ACE_morphine",2],["rhsusf_mag_17Rnd_9x19_FMJ",4,17]]],
+		["eo_legstrappack_2",[["rhs_grenade_anm8_mag",2,1],["rhs_charge_tnt_x2_mag",2,1]]],
+		["eo_carryall_2",[["RPG7_F",8,1]]],
+		"H_Hat_tan","eo_bandana_4",
+		[],
+		["ItemMap","","ItemRadio","ItemCompass","ItemWatch",""]]
+    ],
+    //Assistant AA
+	["I_Soldier_AAA_F",[
+        ["rhsusf_weap_MP7A2_aor1","","","optic_Holosight_smg_blk_F",["rhsusf_mag_40Rnd_46x30_FMJ",40],[],""],
+		[],
+		["rhsusf_weap_glock17g4","","","",["rhsusf_mag_17Rnd_9x19_JHP",17],[],""],
+		["eo_shirt_plainblk",[["ACE_fieldDressing",4],["ACE_epinephrine",2],["ACE_morphine",2],["rhsusf_mag_17Rnd_9x19_FMJ",4,17]]],
+		["eo_legstrappack_2",[["rhs_grenade_anm8_mag",2,1],["rhs_charge_tnt_x2_mag",2,1]]],
+		["eo_carryall_2",[["RPG7_F",2,1]]],
+		"H_Hat_tan","eo_bandana_4",
+		[],
+		["ItemMap","","ItemRadio","ItemCompass","ItemWatch",""]]
+    ],
+    //Grenadier
+	["I_Soldier_GL_F",[
+        ["rhsusf_weap_MP7A2_aor1","","","optic_Holosight_smg_blk_F",["rhsusf_mag_40Rnd_46x30_FMJ",40],[],""],
+		[],
+		["rhs_weap_M320","","","",["rhs_mag_M441_HE",1],[],""],
+		["eo_hoodie_kabeiroi",[["ACE_fieldDressing",4],["ACE_epinephrine",2],["ACE_morphine",2],["rhsusf_mag_40Rnd_46x30_FMJ",4,40]]],
+		["eo_legstrappack_2",[["rhsusf_mag_40Rnd_46x30_FMJ",9,40]]],
+		["eo_field",[["rhs_mag_M397_HET",12,1],["rhs_mag_M433_HEDP",10,1],["rhs_mag_m714_White",5,1]]],
+		"H_Hat_tan","eo_bandana_4",
+		[],
+		["ItemMap","","ItemRadio","ItemCompass","ItemWatch",""]]
+    ]
+];
+
+OT_guerCampLVL2 = [
+	["Campfire_burning_F",[-0.0356445,0.0998535,0.0299988],26.909,1,0,[0,0],"","",true,false], 
+	["Land_WoodenBox_F",[-1.74756,1.79272,0],135.19,1,0,[3.311e-005,1.35163e-005],"","",true,false], 
+	["Land_TentA_F",[5.34082,0.216797,0],87.3948,1,0,[0,0],"","",true,false], 
+	["Land_TentA_F",[4.35059,3.80078,0],57.6576,1,0,[0,0],"","",true,false], 
+	["Land_TentA_F",[4.87402,-3.62891,0],118.2,1,0,[0,-0],"","",true,false], 
+	["rhsgref_ins_DSHKM",[-0.734863,8.04834,-0.0673757],359.98,1,0,[0.985424,0.050495],"","",true,false], 
+	["rhsgref_ins_DSHKM",[5.44824,-7.28345,-0.0673761],132.389,1,0,[0.985399,0.0505532],"","",true,false], 
+	["Land_Sacks_heap_F",[2.02441,9.66797,0],22.6568,1,0,[0,0],"","",true,false], 
+	["Land_BagFence_Round_F",[3.82129,10.2207,-0.00130129],222.772,1,0,[0,0],"","",true,false], 
+	["Land_BagFence_Long_F",[1.0752,10.6113,-0.000999928],358.245,1,0,[0,0],"","",true,false], 
+	["Land_BagFence_Long_F",[-1.84277,10.5273,-0.000999928],358.245,1,0,[0,0],"","",true,false], 
+	["Land_BagFence_Round_F",[-4.65723,10.0762,-0.00130129],136.002,1,0,[0,-0],"","",true,false], 
+	["Land_BagFence_Short_F",[8.10645,-7.53125,-0.000999928],259.241,1,0,[0,0],"","",true,false], 
+	["Land_BagFence_Short_F",[6.13965,-9.73438,-0.000999928],179.445,1,0,[0,-0],"","",true,false], 
+	["Land_BagFence_Short_F",[7.6709,-8.9707,-0.000999928],131.627,1,0,[0,-0],"","",true,false], 
+	["rhsgref_ins_DSHKM",[-9.67041,-6.78247,-0.0673771],219.677,1,0,[0.985512,0.0504348],"","",true,false], 
+	["Land_BagFence_Round_F",[-10.5361,-9.46289,-0.00130129],4.48306,1,0,[0,0],"","",true,false], 
+	["Land_BagFence_Round_F",[-12.1982,-7.44336,-0.00130129],93.854,1,0,[0,-0],"","",true,false]
+];
+
+OT_AdditionalUnforms = [];
+
+if(OT_hasWS) then {
+	WS_local = [];
+	WS_guerilla = ["U_lxWS_Djella_02_Brown","U_lxWS_Djella_02_Sand","U_lxWS_Djella_03_Green","U_lxWS_Djella_02_Grey","U_SFIA_deserter_lxWS","U_lxWS_SFIA_deserter","U_lxWS_ION_Casual2","U_lxWS_ION_Casual3","U_lxWS_ION_Casual4","U_lxWS_ION_Casual5","U_lxWS_ION_Casual6"];
+	OT_clothes_guerilla append WS_guerilla;
+
+	OT_AdditionalUnforms append WS_local;
+	OT_AdditionalUnforms append OT_clothes_guerilla;
+	OT_AdditionalUnforms append [
+		"U_lxWS_C_Djella_03","U_lxWS_C_Djella_06","U_lxWS_C_Djella_02","U_lxWS_C_Djella_02a","U_lxWS_C_Djella_07","U_lxWS_C_Djella_05","U_lxWS_C_Djella_04","U_lxWS_C_Djella_01","U_lxWS_Tak_02_A",
+		"U_lxWS_Tak_03_B","U_lxWS_Tak_03_A","U_lxWS_Tak_03_C","U_lxWS_Tak_01_B"
+	];
+	
+	OT_NATO_Unit_PoliceCommander = "Com_Police_N3";
+	OT_NATO_Unit_Police = "Com_Police_N4";
+	
+	OT_NATO_Vehicles_GroundSupport append ["APC_Wheeled_01_command_base_lxWS"];
+	OT_NATO_Vehicles_APC append ["APC_Wheeled_01_atgm_base_lxWS"];
+	
+	OT_NATO_ReinforcementsWep append ["arifle_Velko_lxWS"];
+	OT_NATO_GarrisonWep append ["srifle_EBR_snake_lxWS","arifle_VelkoR5_lxWS"];
+	OT_NATO_GarrisonWepMG append ["LMG_S77_Desert_lxWS"];
+	OT_NATO_GarrisonWepGL append ["arifle_VelkoR5_GL_lxWS"];
+	OT_NATO_ArmyWep append ["arifle_VelkoR5_snake_lxWS","arifle_VelkoR5_GL_snake_lxWS","arifle_XMS_Base_khk_lxWS"];
+	OT_NATO_ArmyWepGL append ["arifle_VelkoR5_GL_snake_lxWS","arifle_XMS_GL_Sand_lxWS"];
+	OT_NATO_ArmyWepMG append ["LMG_S77_Compact_Snakeskin_lxWS"];
+	OT_NATOBluprints append ["APC_Wheeled_01_atgm_base_lxWS","APC_Wheeled_01_command_base_lxWS","B_UAV_02_lxWS","APC_Wheeled_01_mortar_base_lxWS","B_ION_APC_Wheeled_02_hmg_lxWS","B_ION_Heli_Light_02_dynamicLoadout_lxWS","B_GEN_APC_Wheeled_02_hmg_lxWS","B_UN_Heli_Transport_02_lxWS","B_MBT_03_cannon_lxWS"];
+};
+
+if(OT_has3F) then {
+	OT_NATO_Unit_HVT = "UK3CB_CW_US_B_LATE_OFF";
+	OT_NATO_Vehicle_HVT = "UK3CB_MDF_B_M1151";
+
+	OT_NATO_ReinforcementsLead = "UK3CB_MDF_B_TL";
+	OT_NATO_Reinforcements = ["UK3CB_MDF_B_AR","UK3CB_MDF_B_AA","UK3CB_MDF_B_AT","UK3CB_MDF_B_DEM","UK3CB_MDF_B_GL","UK3CB_MDF_B_LAT","UK3CB_MDF_B_MG","UK3CB_MDF_B_MK","UK3CB_MDF_B_MD","UK3CB_MDF_B_RIF_1","UK3CB_MDF_B_SNI","UK3CB_MDF_B_SPOT"]; //Troops that come to assist police/ run checkpoints
+
+	OT_NATO_GarrisonLead = "UK3CB_CW_US_B_LATE_TL";
+	OT_NATO_Garrison = [
+		"UK3CB_CW_US_B_LATE_AA","UK3CB_CW_US_B_LATE_AT","UK3CB_CW_US_B_LATE_DEM","UK3CB_CW_US_B_LATE_GL","UK3CB_CW_US_B_LATE_LAT","UK3CB_CW_US_B_LATE_MG","UK3CB_CW_US_B_LATE_MK","UK3CB_CW_US_B_LATE_MD","UK3CB_CW_US_B_LATE_RIF_1",
+		"UK3CB_CW_US_B_LATE_SF_SPOT","UK3CB_CW_US_B_LATE_RADIO","UK3CB_CW_US_B_LATE_SF_SNI"
+	]; //Troops that gaurd objectives/bases
+	
+	OT_NATO_ArmyLead = ["UK3CB_MDF_B_SF_TL"];
+	OT_NATO_Army = [[
+		"UK3CB_MDF_B_SF_AT","UK3CB_MDF_B_SF_AR","UK3CB_MDF_B_SF_DEM","UK3CB_MDF_B_SF_LAT","UK3CB_MDF_B_SF_MG","UK3CB_MDF_B_SF_MK","UK3CB_MDF_B_SF_MD","UK3CB_MDF_B_SF_RIF_2","UK3CB_MDF_B_SF_SNI","UK3CB_MDF_B_SF_SPOT"]
+	]; //men o' war
+	
+	OT_NATO_Unit_Sniper = "UK3CB_CW_US_B_LATE_SF_SNI";
+	OT_NATO_Unit_Spotter = "UK3CB_CW_US_B_LATE_SF_SPOT";
+	OT_NATO_Unit_AA_spec = "UK3CB_CW_US_B_LATE_SF_BO_AA";
+	OT_NATO_Unit_AA_ass = "UK3CB_CW_US_B_LATE_SF_AA_ASST";
+	OT_NATO_Unit_AT_spec = "UK3CB_CW_US_B_LATE_SF_AT";
+	OT_NATO_Unit_TeamLeader = "UK3CB_CW_US_B_LATE_SF_TL";
+	
+	OT_NATO_Unit_PoliceCommander = "UK3CB_APD_B_TL";
+	OT_NATO_Unit_Police = "UK3CB_APD_B_PAT_RIF_LITE";
+	
+	OT_NATO_Engineer = "UK3CB_CW_US_B_LATE_ENG";
+	OT_NATO_Vehicle_Support_Troop = "UK3CB_CW_US_B_LATE_RIF_2";
+	
+	OT_NATO_StaticGarrison_LevelOne = ["UK3CB_CW_US_B_LATE_M2_TriPod","UK3CB_CW_US_B_LATE_M2_TriPod","UK3CB_MDF_B_M1151_OGPK_M240","UK3CB_MDF_B_M1151_OGPK_M2"];
+	OT_NATO_StaticGarrison_LevelTwo = ["UK3CB_CW_US_B_LATE_M2_TriPod","UK3CB_CW_US_B_LATE_TOW_TriPod","UK3CB_CW_US_B_LATE_MK19_TriPod","UK3CB_MDF_B_M1151_OGPK_M2","UK3CB_MDF_B_M113_MK19","UK3CB_MDF_B_Warrior","UK3CB_CW_US_B_LATE_M252","UK3CB_CW_US_B_LATE_M2A2","UK3CB_MDF_B_MTVR_Zu23"];
+	
+	OT_NATO_StaticGarrison_LevelThree = [
+		"UK3CB_CW_US_B_LATE_TOW_TriPod","UK3CB_CW_US_B_LATE_TOW_TriPod","UK3CB_CW_US_B_LATE_Stinger_AA_pod","UK3CB_CW_US_B_LATE_M2_TriPod","UK3CB_CW_US_B_LATE_M2_TriPod","UK3CB_CW_US_B_LATE_MK19_TriPod","UK3CB_MDF_B_M113_M2","UK3CB_MDF_B_M113_MK19","UK3CB_MDF_B_LSV_02_Armed","UK3CB_CW_US_B_LATE_M252","UK3CB_MDF_B_M60A3",
+		"UK3CB_MDF_B_Warrior_Cage","UK3CB_MDF_B_M1151_OGPK_M2","UK3CB_MDF_B_MTVR_Zu23"
+	];
+	
+	OT_NATO_StaticGarrison_HQ = [
+		"UK3CB_CW_US_B_LATE_TOW_TriPod","UK3CB_CW_US_B_LATE_TOW_TriPod","UK3CB_CW_US_B_LATE_Stinger_AA_pod","UK3CB_CW_US_B_LATE_M2_TriPod","UK3CB_CW_US_B_LATE_M2_TriPod","UK3CB_CW_US_B_LATE_M2_TriPod","UK3CB_CW_US_B_LATE_MK19_TriPod","UK3CB_MDF_B_M113_M2","UK3CB_MDF_B_M113_MK19",
+		"UK3CB_MDF_B_LSV_02_Armed","UK3CB_CW_US_B_LATE_M252","UK3CB_CW_US_B_EARLY_M1A1","UK3CB_CW_US_B_EARLY_M1A1","UK3CB_MDF_B_M60A3","UK3CB_MDF_B_Warrior_Cage_Camo","UK3CB_MDF_B_Warrior_Cage_Camo","UK3CB_CW_US_B_LATE_M2A2","UK3CB_MDF_B_MTVR_Zu23"
+	];
+	
+	OT_NATO_HMG = "UK3CB_CW_US_B_LATE_M2_TriPod";
+	OT_NATO_Vehicles_AirGarrison = [
+		["UK3CB_MDF_B_UH1H_MED_NAVY",1],
+		["UK3CB_MDF_B_AH1Z_NAVY",1],
+		["UK3CB_MDF_B_Bell412_Armed_NAVY",2]
+	];
+	OT_NATO_Vehicles_StaticAAGarrison = ["UK3CB_CW_US_B_LATE_Stinger_AA_pod","UK3CB_CW_US_B_LATE_Stinger_AA_pod","UK3CB_MDF_B_MTVR_Zu23","UK3CB_MDF_B_MTVR_Zu23"]; //Added to every airfield
+
+	OT_NATO_Vehicles_JetGarrison = [
+		["UK3CB_MDF_B_Mystere_CAS1",1],
+		["UK3CB_MDF_B_Mystere_AA1",1]
+	];
+	
+	OT_NATO_Random_Statics = ["UK3CB_CW_US_B_LATE_M2_TriPod","UK3CB_CW_US_B_LATE_TOW_TriPod"];
+	
+	OT_NATO_Vehicle_PoliceHeli = "RHS_UH1Y_d";
+	OT_NATO_Vehicle_Quad = "B_Quadbike_01_F";
+	OT_NATO_Vehicle_Police = "rhsusf_m113d_usarmy_M240";
+	OT_NATO_Vehicle_Transport = ["UK3CB_MDF_B_MTVR_Open","UK3CB_MDF_B_MTVR_Closed","UK3CB_CW_US_B_LATE_M939_Guntruck"];
+	OT_NATO_Vehicle_Transport_Light = "UK3CB_MDF_B_M998_2DR";
+	OT_NATO_Vehicles_PoliceSupport = ["UK3CB_MDF_B_M1151_OGPK_M2","UK3CB_MDF_B_M1151_OGPK_MK19","UK3CB_MDF_B_M1151_GPK_M240"];OT_NATO_Vehicles_PoliceSupport = selectRandom OT_NATO_Vehicles_PoliceSupport;
+	OT_NATO_Vehicles_ReconDrone = "B_UAV_01_F";
+	OT_NATO_Vehicles_CASDrone = "B_UAV_02_CAS_F";
+	OT_NATO_Vehicles_AirSupport = ["UK3CB_MDF_B_AH1Z_NAVY"];
+	OT_NATO_Vehicles_AirSupport_Small = ["UK3CB_MDF_B_Bell412_Armed","UK3CB_MDF_B_UH1H_GUNSHIP"];
+	OT_NATO_Vehicles_GroundSupport = ["UK3CB_MDF_B_M1151_GPK_M240","UK3CB_MDF_B_M1151_GPK_M2","UK3CB_MDF_B_LSV_02_Armed","UK3CB_MDF_B_M1025_MK19","UK3CB_MDF_B_Offroad_HMG"];
+	OT_NATO_Vehicles_TankSupport = ["UK3CB_MDF_B_M60A3","UK3CB_MDF_B_Warrior_Cage_Camo","UK3CB_CW_US_B_LATE_M1A1","UK3CB_CW_US_B_LATE_M60a3"];
+	OT_NATO_Vehicles_Convoy = ["UK3CB_MDF_B_M1151","UK3CB_MDF_B_M113_M2","UK3CB_MDF_B_LSV_02_Armed","UK3CB_MDF_B_LSV_02_Armed","UK3CB_MDF_B_LSV_02_AT"];
+	OT_NATO_Vehicles_AirWingedSupport = ["UK3CB_CW_US_B_LATE_A10","UK3CB_AAF_B_Gripen_G"];
+	OT_NATO_Vehicle_AirTransport_Small = "UK3CB_MDF_B_Bell412_Utility";
+	OT_NATO_Vehicle_AirTransport = ["UK3CB_CW_US_B_LATE_UH60M","UK3CB_MDF_B_UH1H_M240"];
+	OT_NATO_Vehicle_AirTransport_Large = "UK3CB_CW_US_B_LATE_CH47";
+	OT_NATO_Vehicle_Boat_Small = "B_Boat_Armed_01_minigun_F";
+	OT_NATO_Vehicles_APC = ["UK3CB_MDF_B_Warrior_Cage_Camo","UK3CB_MDF_B_Warrior_Camo","UK3CB_MDF_B_Warrior","UK3CB_CW_US_B_LATE_M2A2"];
+	OT_NATO_Vehicle_CTRGTransport = "B_CTRG_Heli_Transport_01_tropic_F";
+	OT_NATO_Mortar = "UK3CB_CW_US_B_LATE_M252";
+
+	OT_NATO_ReinforcementsWep = ["UK3CB_FAMAS_F1","UK3CB_FNFAL_FULL_RAILS","UK3CB_G3A3_RIS","UK3CB_M16A1","rhs_weap_l1a1","rhs_weap_m1garand_sa43","UK3CB_P90_black","UK3CB_G36A1_KSK_K"];
+	OT_NATO_ReinforcementsWepGL = ["UK3CB_FAMAS_F1_GLM203","UK3CB_AG36_KSK"];
+	OT_NATO_ReinforcementsWepMG = ["rhs_weap_fnmag","UK3CB_M16A1_LSW","rhs_weap_m249"];
+	OT_NATO_ReinforcementsWepSR = ["UK3CB_PSG1A1_RIS","UK3CB_M14DMR_Railed"];
+
+	OT_NATO_GarrisonWep = ["UK3CB_M16A1","UK3CB_M16A2","UK3CB_M16_Carbine","UK3CB_M16A3","rhs_weap_m4_carryhandle","rhs_weap_SCARH_STD"];
+	OT_NATO_GarrisonWepGL = ["UK3CB_M16A2_UGL","rhs_weap_m4_carryhandle_m203"];
+	OT_NATO_GarrisonWepMG = ["rhs_weap_m240G","rhs_weap_m249"];
+	OT_NATO_GarrisonWepSR = ["UK3CB_M21","UK3CB_M14DMR","rhs_weap_M107_d"];
+
+	OT_NATO_ArmyWep = ["UK3CB_FAMAS_F1","rhs_weap_mk17_CQC","rhs_weap_mk17_STD","UK3CB_G36A1","hlc_rifle_auga1_t","hlc_rifle_SG550"];
+	OT_NATO_ArmyWepGL = ["UK3CB_FAMAS_F1_GLM203","UK3CB_AG36A1","hlc_rifle_SG550_GL"];
+	OT_NATO_ArmyWepMG = ["UK3CB_MG3","rhs_weap_m240B","rhs_weap_m249_pip_L"];
+	OT_NATO_ArmyWepSR = ["UK3CB_PSG1A1_RIS","rhs_weap_mk17_LB","hlc_rifle_SG551LB_TAC"];
+	OT_NATO_ArmyBaseGroup = [//Attacking squads always have these troops gaurenteed in them (+ squadleader)
+		["UK3CB_MDF_B_SF_AA","UK3CB_MDF_B_SF_AT","UK3CB_MDF_B_SF_MG","UK3CB_MDF_B_SF_MD"]
+	]; 
+	
+	OT_ALL_NATOAR = OT_NATO_ReinforcementsWep + OT_NATO_GarrisonWep +  OT_NATO_ArmyWep;
+	OT_ALL_NATOGL = OT_NATO_ArmyWepGL + OT_NATO_GarrisonWepGL + OT_NATO_ReinforcementsWepGL;
+	OT_ALL_NATOMG = OT_NATO_ReinforcementsWepMG + OT_NATO_GarrisonWepMG + OT_NATO_ArmyWepMG;
+	OT_ALL_NATOSR = OT_NATO_ReinforcementsWepSR + OT_NATO_GarrisonWepSR + OT_NATO_ArmyWepSR + ["rhs_weap_M107_leu"];
+	
+	OT_NATO_weapons_Police = ["uk3cb_enfield_no4_walnut","UK3CB_P90_black","rhs_weap_M590_5RD","UK3CB_P90C_black","UK3CB_MP5K_PDW","UK3CB_MP5A4","UK3CB_M1903A1","hgun_PDW2000_F","SMG_02_F","rhs_weap_m3a1"];
+	
+};

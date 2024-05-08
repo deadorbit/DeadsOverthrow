@@ -1,0 +1,25 @@
+class Campaign
+{
+	name = "Overthrow";
+	firstBattle = Missions;
+	disableMP = -1;
+
+	briefingName = "Overthrow";
+	author = "Edited-Gerhart, Original-ARMAzac, then edited again by Deadorbit";
+	overviewPicture = "\overthrow_main\campaign\overthrow_campaign.jpg";
+	overviewText = "";
+
+	class MissionDefault
+	{
+		lives = -1;
+
+		lost = "";
+		end1 = "";
+		end2 = "";
+		end3 = "";
+		end4 = "";
+		end5 = "";
+		end6 = "";
+	};
+
+};
