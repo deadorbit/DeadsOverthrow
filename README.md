@@ -15,3 +15,11 @@ Simply put, Dead's Overthrow hopes to combine the open world, and asymmetrical g
 * A long list of bug fixes: performance optimizations, resolved exploits, unfinished features completed, and AI corrections are just the start of the QOL changes made.
 * UI overhauls, making obscure information easier to understand, and better explaining the features available in the game.
 * Many, many, more changes, features, and otherwise from the original Overthrow.
+
+### To Do:
+* Add ability to "place" weapons (I.e for weapon racks.)
+* Rework talk to UI to use more modern Arma3 features
+* Add furniture to NPC houses
+* Add "Auto loadout" to player squad members if near warehouse. Will cause them to automatically take a helmet, vest, primary weapon, and ammo from warehouse.
+* Add ability for NATO to bag dead bodies after so long.
+* Virtualize NATO convoys, ect. Have their route predicated as a path, and use time and speed to predict where they will be. If the convoy gets close to a player, physically spawn it in.
