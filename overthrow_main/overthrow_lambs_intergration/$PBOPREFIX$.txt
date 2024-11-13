@@ -1,0 +1,4 @@
+//<'lambs_danger.pbo' properties via Mikero's dos tools, dll version 9.45>
+prefix=overthrow_lambs_intergration;
+//PboType=Arma Addon;
+//</properties>

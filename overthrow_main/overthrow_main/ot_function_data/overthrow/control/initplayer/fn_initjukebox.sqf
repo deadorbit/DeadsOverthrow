@@ -1,0 +1,7 @@
+					//Lead Track      	Lead Track (Apex RE) 	Lead Track (Malden RE) 		This Is War remix Flashpoint	Fighter Jets          Airpower			  Welcome To Tanoa      An Unknown Enemy    No Time For Quest   Into The Sun		 Marksman             Evolution   			   Win                 Fight for the city   Shaper Claws		   Conquistador       Combined Arms
+OT_MUSIC = 			["LeadTrack01_F",	"LeadTrack01_F_EXP",	"LeadTrack02_F_Malden",		"LeadTrack01_F_Mark",			"LeadTrack01_F_Malden","LeadTrack01_F_Jets","LeadTrack02_F_Jets","AmbientTrack02_F_EXP","LeadTrack02_F_EXP","LeadTrack03_F_EXP","LeadTrack02_F_Mark","LeadTrack03_F_Mark","LeadTrack02_F_Bootcamp","LeadTrack06_F_EPC","LeadTrack01_F_Tank","Music_Russian_Theme","LeadTrack01_F_EPA","LeadTrack02_F"];
+OT_MUSIC_WEIGHTS = 	[0.25,				0.25,					0.25,						0.25,							1,                     0.5,                 0.5,                0.5,                    1,                  1,                  1,                   1,                    1,                        1,                  1,                 1,                    1,                  1];
+if(OT_has_WS) then {
+	OT_MUSIC append  		["LeadTrack01_lxWS",	"AmbientTrack04_lxWS",	["alchemist_02v2_lxWS","alchemist_01v2_lxWS"],	["jukebox_a1_lxWS","jukebox_a2_lxWS"]	];
+	OT_MUSIC_WEIGHTS append [1.5,					0.5,					1,												1										];
+};

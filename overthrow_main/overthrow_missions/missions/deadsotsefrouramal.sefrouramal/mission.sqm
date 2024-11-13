@@ -1,0 +1,2785 @@
+////////////////////////////////////////////////////////////////////
+//DeRap: missions\deadsotsefrouramal.sefrouramal\mission.sqm
+//Produced from mikero's Dos Tools Dll version 9.45
+//https://mikero.bytex.digital/Downloads
+//'now' is Mon Jul 15 17:21:44 2024 : 'file' last modified on Mon Jul 15 17:21:44 2024
+////////////////////////////////////////////////////////////////////
+
+#define _ARMA_
+
+version = 54;
+class EditorData
+{
+	moveGridStep = 1.0;
+	angleGridStep = 0.2617994;
+	scaleGridStep = 1.0;
+	autoGroupingDist = 10.0;
+	toggles = 1;
+	class ItemIDProvider
+	{
+		nextID = 104;
+	};
+	class MarkerIDProvider
+	{
+		nextID = 3;
+	};
+	class Camera
+	{
+		pos[] = {3779.7456,123.358185,6338.5786};
+		dir[] = {0.7131001,-0.39492092,0.5793963};
+		up[] = {0.30652577,0.9186998,0.2490533};
+		aside[] = {0.63064885,-1.5264959e-07,-0.7761825};
+	};
+};
+sourceName = "deadsotrhsSefrouRamal";
+addons[] = {"A3_Structures_F_Exp_Industrial_Port","A3_Characters_F","A3_Weapons_F","A3_Characters_F_Heads","A3_Characters_F_Orange_Facewear","ace_goggles","ace_attach","ace_chemlights","A3_Weapons_F_Items","ace_medical_engine","ace_medical_treatment","ace_advanced_fatigue","ace_captives","ace_cargo","ace_explosives","ace_fortify","ace_respawn","A3_Modules_F_Curator_Curator","A3_Modules_F_Hc","A3_Structures_F_Enoch_Cultural_CastleRuins","A3_Structures_F_Mil_Cargo","A3_Ui_F"};
+class AddonsMetaData
+{
+	class List
+	{
+		items = 20;
+		class Item0
+		{
+			className = "A3_Structures_F_Exp_Industrial";
+			name = "Arma 3 Apex - Industrial Structures";
+			author = "Bohemia Interactive";
+			url = "https://www.arma3.com";
+		};
+		class Item1
+		{
+			className = "A3_Characters_F";
+			name = "Arma 3 Alpha - Characters and Clothing";
+			author = "Bohemia Interactive";
+			url = "https://www.arma3.com";
+		};
+		class Item2
+		{
+			className = "A3_Weapons_F";
+			name = "Arma 3 Alpha - Weapons and Accessories";
+			author = "Bohemia Interactive";
+			url = "https://www.arma3.com";
+		};
+		class Item3
+		{
+			className = "A3_Characters_F_Orange";
+			name = "Arma 3 Orange - Characters and Clothing";
+			author = "Bohemia Interactive";
+			url = "https://www.arma3.com";
+		};
+		class Item4
+		{
+			className = "ace_goggles";
+			name = "ACE3 - Goggles";
+			author = "ACE-Team";
+			url = "https://ace3.acemod.org/";
+		};
+		class Item5
+		{
+			className = "ace_attach";
+			name = "ACE3 - Attach";
+			author = "ACE-Team";
+			url = "https://ace3.acemod.org/";
+		};
+		class Item6
+		{
+			className = "ace_chemlights";
+			name = "ace_chemlights";
+			author = "ACE-Team";
+			url = "https://ace3.acemod.org/";
+		};
+		class Item7
+		{
+			className = "ace_medical_engine";
+			name = "ACE3 - Medical Engine";
+			author = "ACE-Team";
+			url = "https://ace3.acemod.org/";
+		};
+		class Item8
+		{
+			className = "ace_medical_treatment";
+			name = "ACE3 - Medical Treatment";
+			author = "ACE-Team";
+			url = "https://ace3.acemod.org/";
+		};
+		class Item9
+		{
+			className = "ace_advanced_fatigue";
+			name = "ACE3 - Advanced Fatigue";
+			author = "ACE-Team";
+			url = "https://ace3.acemod.org/";
+		};
+		class Item10
+		{
+			className = "ace_captives";
+			name = "ACE3 - Captives";
+			author = "ACE-Team";
+			url = "https://ace3.acemod.org/";
+		};
+		class Item11
+		{
+			className = "ace_cargo";
+			name = "ACE3 - Cargo";
+			author = "ACE-Team";
+			url = "https://ace3.acemod.org/";
+		};
+		class Item12
+		{
+			className = "ace_explosives";
+			name = "ACE3 - Explosives";
+			author = "ACE-Team";
+			url = "https://ace3.acemod.org/";
+		};
+		class Item13
+		{
+			className = "ace_fortify";
+			name = "ace_fortify";
+			author = "ACE-Team";
+			url = "https://ace3.acemod.org/";
+		};
+		class Item14
+		{
+			className = "ace_respawn";
+			name = "ACE3 - Respawn";
+			author = "ACE-Team";
+			url = "https://ace3.acemod.org/";
+		};
+		class Item15
+		{
+			className = "A3_Modules_F_Curator";
+			name = "Arma 3 Zeus Update - Scripted Modules";
+			author = "Bohemia Interactive";
+			url = "https://www.arma3.com";
+		};
+		class Item16
+		{
+			className = "A3_Modules_F";
+			name = "Arma 3 Alpha - Scripted Modules";
+			author = "Bohemia Interactive";
+			url = "https://www.arma3.com";
+		};
+		class Item17
+		{
+			className = "A3_Structures_F_Enoch_Cultural";
+			name = "Arma 3 Contact Platform - Cultural Buildings";
+			author = "Bohemia Interactive";
+			url = "https://www.arma3.com";
+		};
+		class Item18
+		{
+			className = "A3_Structures_F_Mil";
+			name = "Arma 3 - Military Buildings and Structures";
+			author = "Bohemia Interactive";
+			url = "https://www.arma3.com";
+		};
+		class Item19
+		{
+			className = "A3_Ui_F";
+			name = "Arma 3 - User Interface";
+			author = "Bohemia Interactive";
+			url = "https://www.arma3.com";
+		};
+	};
+};
+dlcs[] = {"Expansion","Enoch"};
+randomSeed = 3653669;
+class ScenarioData
+{
+	author = "deadorbit";
+};
+class Mission
+{
+	class Intel
+	{
+		timeOfChanges = 1800.0002;
+		startWeather = 0.3;
+		startWind = 0.1;
+		startWaves = 0.1;
+		forecastWeather = 0.1;
+		forecastWind = 0.1;
+		forecastWaves = 0.1;
+		forecastLightnings = 0.1;
+		wavesForced = 1;
+		windForced = 1;
+		year = 2035;
+		month = 6;
+		day = 6;
+		startFogDecay = 0.014;
+		forecastFogDecay = 0.014;
+	};
+	class Entities
+	{
+		items = 45;
+		class Item0
+		{
+			dataType = "Object";
+			class PositionInfo
+			{
+				position[] = {4715.596,58.391285,122.304};
+				angles[] = {0.0,1.4609278,0.0};
+			};
+			side = "Empty";
+			flags = 5;
+			class Attributes
+			{
+				dynamicSimulation = 1;
+			};
+			id = 4;
+			type = "Land_WarehouseShelter_01_F";
+			atlOffset = 3.8146973e-06;
+		};
+		class Item1
+		{
+			dataType = "Object";
+			class PositionInfo
+			{
+				position[] = {4715.308,59.91086,89.556};
+				angles[] = {0.0,1.481418,0.0};
+			};
+			side = "Empty";
+			flags = 5;
+			class Attributes
+			{
+				dynamicSimulation = 1;
+			};
+			id = 6;
+			type = "Land_ContainerLine_03_F";
+		};
+		class Item2
+		{
+			dataType = "Object";
+			class PositionInfo
+			{
+				position[] = {4758.939,59.920135,110.837};
+				angles[] = {0.0,4.600444,-0.0};
+			};
+			side = "Empty";
+			flags = 5;
+			class Attributes
+			{
+				dynamicSimulation = 1;
+			};
+			id = 7;
+			type = "Land_ContainerLine_01_F";
+		};
+		class Item3
+		{
+			dataType = "Object";
+			class PositionInfo
+			{
+				position[] = {4716.414,78.18799,143.46};
+				angles[] = {0.0,2.91278,0.0};
+			};
+			side = "Empty";
+			flags = 5;
+			class Attributes
+			{
+				dynamicSimulation = 1;
+			};
+			id = 8;
+			type = "Land_MobileCrane_01_F";
+			atlOffset = -3.8146973e-06;
+		};
+		class Item4
+		{
+			dataType = "Group";
+			side = "Independent";
+			class Entities
+			{
+				items = 1;
+				class Item0
+				{
+					dataType = "Object";
+					class PositionInfo
+					{
+						position[] = {10016.164,58.302326,158.83633};
+						angles[] = {0.003996757,4.6725082,6.27119};
+					};
+					side = "Independent";
+					flags = 6;
+					class Attributes
+					{
+						rank = "COLONEL";
+						init = "call{this setCaptive true;}";
+						name = "bigboss";
+						description = "Host";
+						isPlayable = 1;
+						class Inventory
+						{
+							class uniform
+							{
+								typeName = "U_IG_Guerilla2_3";
+								isBackpack = 0;
+								class MagazineCargo
+								{
+									items = 1;
+									class Item0
+									{
+										name = "Chemlight_blue";
+										count = 1;
+										ammoLeft = 1;
+									};
+								};
+								class ItemCargo
+								{
+									items = 1;
+									class Item0
+									{
+										name = "FirstAidKit";
+										count = 1;
+									};
+								};
+							};
+							map = "ItemMap";
+							compass = "ItemCompass";
+							watch = "ItemWatch";
+							radio = "ItemRadio";
+							gps = "ItemGPS";
+							goggles = "G_Shades_Black";
+							headgear = "H_Watchcap_blk";
+						};
+					};
+					id = 32;
+					type = "I_G_officer_F";
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property = "ace_isSurrendered";
+							expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+							class Value
+							{
+								class data
+								{
+									singleType = "BOOL";
+									value = 0;
+								};
+							};
+						};
+						class Attribute1
+						{
+							property = "ace_isEngineer";
+							expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 2.0;
+								};
+							};
+						};
+						class Attribute2
+						{
+							property = "face";
+							expression = "_this setface _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "STRING";
+									value = "";
+								};
+							};
+						};
+						class Attribute3
+						{
+							property = "ace_isHandcuffed";
+							expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+							class Value
+							{
+								class data
+								{
+									singleType = "BOOL";
+									value = 0;
+								};
+							};
+						};
+						class Attribute4
+						{
+							property = "pitch";
+							expression = "_this setpitch _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 1.0;
+								};
+							};
+						};
+						class Attribute5
+						{
+							property = "speaker";
+							expression = "_this setspeaker _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "STRING";
+									value = "Male01ENGB";
+								};
+							};
+						};
+						class Attribute6
+						{
+							property = "ace_isMedic";
+							expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 2.0;
+								};
+							};
+						};
+						nAttributes = 7;
+					};
+				};
+			};
+			class Attributes{};
+			id = 31;
+		};
+		class Item5
+		{
+			dataType = "Group";
+			side = "Independent";
+			class Entities
+			{
+				items = 1;
+				class Item0
+				{
+					dataType = "Object";
+					class PositionInfo
+					{
+						position[] = {10016.697,58.28223,160.22054};
+						angles[] = {0.012000273,4.713925,6.267187};
+					};
+					side = "Independent";
+					flags = 6;
+					class Attributes
+					{
+						rank = "COLONEL";
+						init = "call{this setCaptive true;}";
+						isPlayable = 1;
+						class Inventory
+						{
+							class uniform
+							{
+								typeName = "U_IG_Guerilla1_1";
+								isBackpack = 0;
+								class ItemCargo
+								{
+									items = 1;
+									class Item0
+									{
+										name = "FirstAidKit";
+										count = 1;
+									};
+								};
+							};
+							map = "ItemMap";
+						};
+					};
+					id = 34;
+					type = "I_G_Soldier_F";
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property = "ace_isSurrendered";
+							expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+							class Value
+							{
+								class data
+								{
+									singleType = "BOOL";
+									value = 0;
+								};
+							};
+						};
+						class Attribute1
+						{
+							property = "ace_isEngineer";
+							expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 2.0;
+								};
+							};
+						};
+						class Attribute2
+						{
+							property = "face";
+							expression = "_this setface _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "STRING";
+									value = "";
+								};
+							};
+						};
+						class Attribute3
+						{
+							property = "ace_isHandcuffed";
+							expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+							class Value
+							{
+								class data
+								{
+									singleType = "BOOL";
+									value = 0;
+								};
+							};
+						};
+						class Attribute4
+						{
+							property = "pitch";
+							expression = "_this setpitch _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 1.0;
+								};
+							};
+						};
+						class Attribute5
+						{
+							property = "speaker";
+							expression = "_this setspeaker _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "STRING";
+									value = "Male01ENGB";
+								};
+							};
+						};
+						class Attribute6
+						{
+							property = "ace_isMedic";
+							expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 2.0;
+								};
+							};
+						};
+						nAttributes = 7;
+					};
+				};
+			};
+			class Attributes{};
+			id = 33;
+		};
+		class Item6
+		{
+			dataType = "Group";
+			side = "Independent";
+			class Entities
+			{
+				items = 1;
+				class Item0
+				{
+					dataType = "Object";
+					class PositionInfo
+					{
+						position[] = {10018.784,58.392445,166.83577};
+						angles[] = {0.01599837,4.78098,6.2711854};
+					};
+					side = "Independent";
+					flags = 6;
+					class Attributes
+					{
+						rank = "COLONEL";
+						init = "call{this setCaptive true; this addEventHandler [""Fired"", {_this spawn MEL_FNC_WE}];}";
+						isPlayable = 1;
+						class Inventory
+						{
+							class uniform
+							{
+								typeName = "U_IG_Guerilla1_1";
+								isBackpack = 0;
+								class ItemCargo
+								{
+									items = 1;
+									class Item0
+									{
+										name = "FirstAidKit";
+										count = 1;
+									};
+								};
+							};
+							map = "ItemMap";
+						};
+					};
+					id = 36;
+					type = "I_G_Soldier_F";
+					atlOffset = 0.20499039;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property = "ace_isSurrendered";
+							expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+							class Value
+							{
+								class data
+								{
+									singleType = "BOOL";
+									value = 0;
+								};
+							};
+						};
+						class Attribute1
+						{
+							property = "ace_isEngineer";
+							expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 2.0;
+								};
+							};
+						};
+						class Attribute2
+						{
+							property = "face";
+							expression = "_this setface _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "STRING";
+									value = "";
+								};
+							};
+						};
+						class Attribute3
+						{
+							property = "ace_isHandcuffed";
+							expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+							class Value
+							{
+								class data
+								{
+									singleType = "BOOL";
+									value = 0;
+								};
+							};
+						};
+						class Attribute4
+						{
+							property = "pitch";
+							expression = "_this setpitch _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 1.0;
+								};
+							};
+						};
+						class Attribute5
+						{
+							property = "speaker";
+							expression = "_this setspeaker _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "STRING";
+									value = "Male01ENGB";
+								};
+							};
+						};
+						class Attribute6
+						{
+							property = "ace_isMedic";
+							expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 2.0;
+								};
+							};
+						};
+						nAttributes = 7;
+					};
+				};
+			};
+			class Attributes{};
+			id = 35;
+			atlOffset = 0.20499039;
+		};
+		class Item7
+		{
+			dataType = "Group";
+			side = "Independent";
+			class Entities
+			{
+				items = 1;
+				class Item0
+				{
+					dataType = "Object";
+					class PositionInfo
+					{
+						position[] = {10017.445,58.237877,163.7342};
+						angles[] = {0.011995304,4.7349734,6.27119};
+					};
+					side = "Independent";
+					flags = 6;
+					class Attributes
+					{
+						rank = "COLONEL";
+						init = "call{this setCaptive true;}";
+						isPlayable = 1;
+						class Inventory
+						{
+							class uniform
+							{
+								typeName = "U_IG_Guerilla1_1";
+								isBackpack = 0;
+								class ItemCargo
+								{
+									items = 1;
+									class Item0
+									{
+										name = "FirstAidKit";
+										count = 1;
+									};
+								};
+							};
+							map = "ItemMap";
+						};
+					};
+					id = 38;
+					type = "I_G_Soldier_F";
+					atlOffset = -3.8146973e-06;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property = "ace_isSurrendered";
+							expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+							class Value
+							{
+								class data
+								{
+									singleType = "BOOL";
+									value = 0;
+								};
+							};
+						};
+						class Attribute1
+						{
+							property = "ace_isEngineer";
+							expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 2.0;
+								};
+							};
+						};
+						class Attribute2
+						{
+							property = "face";
+							expression = "_this setface _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "STRING";
+									value = "";
+								};
+							};
+						};
+						class Attribute3
+						{
+							property = "ace_isHandcuffed";
+							expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+							class Value
+							{
+								class data
+								{
+									singleType = "BOOL";
+									value = 0;
+								};
+							};
+						};
+						class Attribute4
+						{
+							property = "pitch";
+							expression = "_this setpitch _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 1.0;
+								};
+							};
+						};
+						class Attribute5
+						{
+							property = "speaker";
+							expression = "_this setspeaker _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "STRING";
+									value = "Male01ENGB";
+								};
+							};
+						};
+						class Attribute6
+						{
+							property = "ace_isMedic";
+							expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 2.0;
+								};
+							};
+						};
+						nAttributes = 7;
+					};
+				};
+			};
+			class Attributes{};
+			id = 37;
+			atlOffset = -3.8146973e-06;
+		};
+		class Item8
+		{
+			dataType = "Group";
+			side = "Independent";
+			class Entities
+			{
+				items = 1;
+				class Item0
+				{
+					dataType = "Object";
+					class PositionInfo
+					{
+						position[] = {10019.438,58.14943,168.73811};
+						angles[] = {0.011995304,4.8403044,6.2791886};
+					};
+					side = "Independent";
+					flags = 6;
+					class Attributes
+					{
+						rank = "COLONEL";
+						init = "call{this setCaptive true;}";
+						isPlayable = 1;
+						class Inventory
+						{
+							class uniform
+							{
+								typeName = "U_IG_Guerilla1_1";
+								isBackpack = 0;
+								class ItemCargo
+								{
+									items = 1;
+									class Item0
+									{
+										name = "FirstAidKit";
+										count = 1;
+									};
+								};
+							};
+							map = "ItemMap";
+						};
+					};
+					id = 40;
+					type = "I_G_Soldier_F";
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property = "ace_isSurrendered";
+							expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+							class Value
+							{
+								class data
+								{
+									singleType = "BOOL";
+									value = 0;
+								};
+							};
+						};
+						class Attribute1
+						{
+							property = "ace_isEngineer";
+							expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 2.0;
+								};
+							};
+						};
+						class Attribute2
+						{
+							property = "face";
+							expression = "_this setface _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "STRING";
+									value = "";
+								};
+							};
+						};
+						class Attribute3
+						{
+							property = "ace_isHandcuffed";
+							expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+							class Value
+							{
+								class data
+								{
+									singleType = "BOOL";
+									value = 0;
+								};
+							};
+						};
+						class Attribute4
+						{
+							property = "pitch";
+							expression = "_this setpitch _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 1.0;
+								};
+							};
+						};
+						class Attribute5
+						{
+							property = "speaker";
+							expression = "_this setspeaker _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "STRING";
+									value = "Male01ENGB";
+								};
+							};
+						};
+						class Attribute6
+						{
+							property = "ace_isMedic";
+							expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 2.0;
+								};
+							};
+						};
+						nAttributes = 7;
+					};
+				};
+			};
+			class Attributes{};
+			id = 39;
+		};
+		class Item9
+		{
+			dataType = "Group";
+			side = "Independent";
+			class Entities
+			{
+				items = 1;
+				class Item0
+				{
+					dataType = "Object";
+					class PositionInfo
+					{
+						position[] = {10019.155,58.26901,158.69846};
+						angles[] = {0.008000983,4.8403044,6.2751846};
+					};
+					side = "Independent";
+					flags = 6;
+					class Attributes
+					{
+						rank = "COLONEL";
+						init = "call{this setCaptive true;}";
+						isPlayable = 1;
+						class Inventory
+						{
+							class uniform
+							{
+								typeName = "U_IG_Guerilla1_1";
+								isBackpack = 0;
+								class ItemCargo
+								{
+									items = 1;
+									class Item0
+									{
+										name = "FirstAidKit";
+										count = 1;
+									};
+								};
+							};
+							map = "ItemMap";
+						};
+					};
+					id = 42;
+					type = "I_G_Soldier_F";
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property = "ace_isSurrendered";
+							expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+							class Value
+							{
+								class data
+								{
+									singleType = "BOOL";
+									value = 0;
+								};
+							};
+						};
+						class Attribute1
+						{
+							property = "ace_isEngineer";
+							expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 2.0;
+								};
+							};
+						};
+						class Attribute2
+						{
+							property = "face";
+							expression = "_this setface _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "STRING";
+									value = "";
+								};
+							};
+						};
+						class Attribute3
+						{
+							property = "ace_isHandcuffed";
+							expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+							class Value
+							{
+								class data
+								{
+									singleType = "BOOL";
+									value = 0;
+								};
+							};
+						};
+						class Attribute4
+						{
+							property = "pitch";
+							expression = "_this setpitch _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 1.0;
+								};
+							};
+						};
+						class Attribute5
+						{
+							property = "speaker";
+							expression = "_this setspeaker _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "STRING";
+									value = "Male01ENGB";
+								};
+							};
+						};
+						class Attribute6
+						{
+							property = "ace_isMedic";
+							expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 2.0;
+								};
+							};
+						};
+						nAttributes = 7;
+					};
+				};
+			};
+			class Attributes{};
+			id = 41;
+		};
+		class Item10
+		{
+			dataType = "Group";
+			side = "Independent";
+			class Entities
+			{
+				items = 1;
+				class Item0
+				{
+					dataType = "Object";
+					class PositionInfo
+					{
+						position[] = {10019.812,58.247063,160.6029};
+						angles[] = {0.011995304,4.8403044,6.27119};
+					};
+					side = "Independent";
+					flags = 6;
+					class Attributes
+					{
+						rank = "COLONEL";
+						init = "call{this setCaptive true;}";
+						isPlayable = 1;
+						class Inventory
+						{
+							class uniform
+							{
+								typeName = "U_IG_Guerilla1_1";
+								isBackpack = 0;
+								class ItemCargo
+								{
+									items = 1;
+									class Item0
+									{
+										name = "FirstAidKit";
+										count = 1;
+									};
+								};
+							};
+							map = "ItemMap";
+						};
+					};
+					id = 44;
+					type = "I_G_Soldier_F";
+					atlOffset = -3.8146973e-06;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property = "ace_isSurrendered";
+							expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+							class Value
+							{
+								class data
+								{
+									singleType = "BOOL";
+									value = 0;
+								};
+							};
+						};
+						class Attribute1
+						{
+							property = "ace_isEngineer";
+							expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 2.0;
+								};
+							};
+						};
+						class Attribute2
+						{
+							property = "face";
+							expression = "_this setface _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "STRING";
+									value = "";
+								};
+							};
+						};
+						class Attribute3
+						{
+							property = "ace_isHandcuffed";
+							expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+							class Value
+							{
+								class data
+								{
+									singleType = "BOOL";
+									value = 0;
+								};
+							};
+						};
+						class Attribute4
+						{
+							property = "pitch";
+							expression = "_this setpitch _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 1.0;
+								};
+							};
+						};
+						class Attribute5
+						{
+							property = "speaker";
+							expression = "_this setspeaker _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "STRING";
+									value = "Male01ENGB";
+								};
+							};
+						};
+						class Attribute6
+						{
+							property = "ace_isMedic";
+							expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 2.0;
+								};
+							};
+						};
+						nAttributes = 7;
+					};
+				};
+			};
+			class Attributes{};
+			id = 43;
+			atlOffset = -3.8146973e-06;
+		};
+		class Item11
+		{
+			dataType = "Group";
+			side = "Independent";
+			class Entities
+			{
+				items = 1;
+				class Item0
+				{
+					dataType = "Object";
+					class PositionInfo
+					{
+						position[] = {10021.21,58.174114,166.15236};
+						angles[] = {0.01599837,4.8403044,6.275192};
+					};
+					side = "Independent";
+					flags = 6;
+					class Attributes
+					{
+						rank = "COLONEL";
+						init = "call{this setCaptive true;}";
+						isPlayable = 1;
+						class Inventory
+						{
+							class uniform
+							{
+								typeName = "U_IG_Guerilla1_1";
+								isBackpack = 0;
+								class ItemCargo
+								{
+									items = 1;
+									class Item0
+									{
+										name = "FirstAidKit";
+										count = 1;
+									};
+								};
+							};
+							map = "ItemMap";
+						};
+					};
+					id = 46;
+					type = "I_G_Soldier_F";
+					atlOffset = -3.8146973e-06;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property = "ace_isSurrendered";
+							expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+							class Value
+							{
+								class data
+								{
+									singleType = "BOOL";
+									value = 0;
+								};
+							};
+						};
+						class Attribute1
+						{
+							property = "ace_isEngineer";
+							expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 2.0;
+								};
+							};
+						};
+						class Attribute2
+						{
+							property = "face";
+							expression = "_this setface _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "STRING";
+									value = "";
+								};
+							};
+						};
+						class Attribute3
+						{
+							property = "ace_isHandcuffed";
+							expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+							class Value
+							{
+								class data
+								{
+									singleType = "BOOL";
+									value = 0;
+								};
+							};
+						};
+						class Attribute4
+						{
+							property = "pitch";
+							expression = "_this setpitch _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 1.0;
+								};
+							};
+						};
+						class Attribute5
+						{
+							property = "speaker";
+							expression = "_this setspeaker _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "STRING";
+									value = "Male01ENGB";
+								};
+							};
+						};
+						class Attribute6
+						{
+							property = "ace_isMedic";
+							expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 2.0;
+								};
+							};
+						};
+						nAttributes = 7;
+					};
+				};
+			};
+			class Attributes{};
+			id = 45;
+			atlOffset = -3.8146973e-06;
+		};
+		class Item12
+		{
+			dataType = "Group";
+			side = "Independent";
+			class Entities
+			{
+				items = 1;
+				class Item0
+				{
+					dataType = "Object";
+					class PositionInfo
+					{
+						position[] = {10022.091,58.148216,167.95467};
+						angles[] = {0.011995304,4.8403044,6.2791886};
+					};
+					side = "Independent";
+					flags = 6;
+					class Attributes
+					{
+						rank = "COLONEL";
+						init = "call{this setCaptive true;}";
+						isPlayable = 1;
+						class Inventory
+						{
+							class uniform
+							{
+								typeName = "U_IG_Guerilla1_1";
+								isBackpack = 0;
+								class ItemCargo
+								{
+									items = 1;
+									class Item0
+									{
+										name = "FirstAidKit";
+										count = 1;
+									};
+								};
+							};
+							map = "ItemMap";
+						};
+					};
+					id = 48;
+					type = "I_G_Soldier_F";
+					atlOffset = -3.8146973e-06;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property = "ace_isSurrendered";
+							expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+							class Value
+							{
+								class data
+								{
+									singleType = "BOOL";
+									value = 0;
+								};
+							};
+						};
+						class Attribute1
+						{
+							property = "ace_isEngineer";
+							expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 2.0;
+								};
+							};
+						};
+						class Attribute2
+						{
+							property = "face";
+							expression = "_this setface _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "STRING";
+									value = "";
+								};
+							};
+						};
+						class Attribute3
+						{
+							property = "ace_isHandcuffed";
+							expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+							class Value
+							{
+								class data
+								{
+									singleType = "BOOL";
+									value = 0;
+								};
+							};
+						};
+						class Attribute4
+						{
+							property = "pitch";
+							expression = "_this setpitch _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 1.0;
+								};
+							};
+						};
+						class Attribute5
+						{
+							property = "speaker";
+							expression = "_this setspeaker _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "STRING";
+									value = "Male01ENGB";
+								};
+							};
+						};
+						class Attribute6
+						{
+							property = "ace_isMedic";
+							expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 2.0;
+								};
+							};
+						};
+						nAttributes = 7;
+					};
+				};
+			};
+			class Attributes{};
+			id = 47;
+			atlOffset = -3.8146973e-06;
+		};
+		class Item13
+		{
+			dataType = "Group";
+			side = "Independent";
+			class Entities
+			{
+				items = 1;
+				class Item0
+				{
+					dataType = "Object";
+					class PositionInfo
+					{
+						position[] = {10022.556,58.19154,164.17116};
+						angles[] = {0.011995304,4.8403044,6.2751846};
+					};
+					side = "Independent";
+					flags = 6;
+					class Attributes
+					{
+						rank = "COLONEL";
+						init = "call{this setCaptive true;}";
+						isPlayable = 1;
+						class Inventory
+						{
+							class uniform
+							{
+								typeName = "U_IG_Guerilla1_1";
+								isBackpack = 0;
+								class ItemCargo
+								{
+									items = 1;
+									class Item0
+									{
+										name = "FirstAidKit";
+										count = 1;
+									};
+								};
+							};
+							map = "ItemMap";
+						};
+					};
+					id = 50;
+					type = "I_G_Soldier_F";
+					atlOffset = -3.8146973e-06;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property = "ace_isSurrendered";
+							expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+							class Value
+							{
+								class data
+								{
+									singleType = "BOOL";
+									value = 0;
+								};
+							};
+						};
+						class Attribute1
+						{
+							property = "ace_isEngineer";
+							expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 2.0;
+								};
+							};
+						};
+						class Attribute2
+						{
+							property = "face";
+							expression = "_this setface _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "STRING";
+									value = "";
+								};
+							};
+						};
+						class Attribute3
+						{
+							property = "ace_isHandcuffed";
+							expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+							class Value
+							{
+								class data
+								{
+									singleType = "BOOL";
+									value = 0;
+								};
+							};
+						};
+						class Attribute4
+						{
+							property = "pitch";
+							expression = "_this setpitch _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 1.0;
+								};
+							};
+						};
+						class Attribute5
+						{
+							property = "speaker";
+							expression = "_this setspeaker _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "STRING";
+									value = "Male01ENGB";
+								};
+							};
+						};
+						class Attribute6
+						{
+							property = "ace_isMedic";
+							expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 2.0;
+								};
+							};
+						};
+						nAttributes = 7;
+					};
+				};
+			};
+			class Attributes{};
+			id = 49;
+			atlOffset = -3.8146973e-06;
+		};
+		class Item14
+		{
+			dataType = "Group";
+			side = "Independent";
+			class Entities
+			{
+				items = 1;
+				class Item0
+				{
+					dataType = "Object";
+					class PositionInfo
+					{
+						position[] = {10020.46,58.212917,163.38484};
+						angles[] = {0.008000983,4.8403044,6.2791886};
+					};
+					side = "Independent";
+					flags = 6;
+					class Attributes
+					{
+						rank = "COLONEL";
+						init = "call{this setCaptive true;}";
+						isPlayable = 1;
+						class Inventory
+						{
+							class uniform
+							{
+								typeName = "U_IG_Guerilla1_1";
+								isBackpack = 0;
+								class ItemCargo
+								{
+									items = 1;
+									class Item0
+									{
+										name = "FirstAidKit";
+										count = 1;
+									};
+								};
+							};
+							map = "ItemMap";
+						};
+					};
+					id = 52;
+					type = "I_G_Soldier_F";
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property = "ace_isSurrendered";
+							expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+							class Value
+							{
+								class data
+								{
+									singleType = "BOOL";
+									value = 0;
+								};
+							};
+						};
+						class Attribute1
+						{
+							property = "ace_isEngineer";
+							expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 2.0;
+								};
+							};
+						};
+						class Attribute2
+						{
+							property = "face";
+							expression = "_this setface _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "STRING";
+									value = "";
+								};
+							};
+						};
+						class Attribute3
+						{
+							property = "ace_isHandcuffed";
+							expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+							class Value
+							{
+								class data
+								{
+									singleType = "BOOL";
+									value = 0;
+								};
+							};
+						};
+						class Attribute4
+						{
+							property = "pitch";
+							expression = "_this setpitch _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 1.0;
+								};
+							};
+						};
+						class Attribute5
+						{
+							property = "speaker";
+							expression = "_this setspeaker _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "STRING";
+									value = "Male01ENGB";
+								};
+							};
+						};
+						class Attribute6
+						{
+							property = "ace_isMedic";
+							expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 2.0;
+								};
+							};
+						};
+						nAttributes = 7;
+					};
+				};
+			};
+			class Attributes{};
+			id = 51;
+		};
+		class Item15
+		{
+			dataType = "Group";
+			side = "Independent";
+			class Entities
+			{
+				items = 1;
+				class Item0
+				{
+					dataType = "Object";
+					class PositionInfo
+					{
+						position[] = {10022.013,58.219883,161.73767};
+						angles[] = {0.008000983,4.8403044,6.2791886};
+					};
+					side = "Independent";
+					flags = 6;
+					class Attributes
+					{
+						rank = "COLONEL";
+						init = "call{this setCaptive true;}";
+						isPlayable = 1;
+						class Inventory
+						{
+							class uniform
+							{
+								typeName = "U_IG_Guerilla1_1";
+								isBackpack = 0;
+								class ItemCargo
+								{
+									items = 1;
+									class Item0
+									{
+										name = "FirstAidKit";
+										count = 1;
+									};
+								};
+							};
+							map = "ItemMap";
+						};
+					};
+					id = 54;
+					type = "I_G_Soldier_F";
+					atlOffset = -3.8146973e-06;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property = "ace_isSurrendered";
+							expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleSurrender}";
+							class Value
+							{
+								class data
+								{
+									singleType = "BOOL";
+									value = 0;
+								};
+							};
+						};
+						class Attribute1
+						{
+							property = "ace_isEngineer";
+							expression = "if !(_value == ([0, 1] select (_this getUnitTrait 'engineer')) || {_value == -1}) then {_this setVariable ['ace_isEngineer', _value, true]}";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 2.0;
+								};
+							};
+						};
+						class Attribute2
+						{
+							property = "face";
+							expression = "_this setface _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "STRING";
+									value = "";
+								};
+							};
+						};
+						class Attribute3
+						{
+							property = "ace_isHandcuffed";
+							expression = "if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
+							class Value
+							{
+								class data
+								{
+									singleType = "BOOL";
+									value = 0;
+								};
+							};
+						};
+						class Attribute4
+						{
+							property = "pitch";
+							expression = "_this setpitch _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 1.0;
+								};
+							};
+						};
+						class Attribute5
+						{
+							property = "speaker";
+							expression = "_this setspeaker _value;";
+							class Value
+							{
+								class data
+								{
+									singleType = "STRING";
+									value = "Male01ENGB";
+								};
+							};
+						};
+						class Attribute6
+						{
+							property = "ace_isMedic";
+							expression = "if (_value != -1 && {_value != (parseNumber (_this getUnitTrait 'medic'))}) then {_this setVariable [""ace_medical_medicClass"", _value, true]}";
+							class Value
+							{
+								class data
+								{
+									singleType = "SCALAR";
+									value = 2.0;
+								};
+							};
+						};
+						nAttributes = 7;
+					};
+				};
+			};
+			class Attributes{};
+			id = 53;
+			atlOffset = -3.8146973e-06;
+		};
+		class Item16
+		{
+			dataType = "Logic";
+			class PositionInfo
+			{
+				position[] = {9525.132,395.9428,869.6168};
+			};
+			id = 55;
+			type = "ace_advanced_fatigue_moduleSettings";
+			atlOffset = 358.93063;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property = "ace_advanced_fatigue_moduleSettings_TerrainGradientFactor";
+					expression = "_this setVariable ['TerrainGradientFactor',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType = "SCALAR";
+							value = 0.8;
+						};
+					};
+				};
+				class Attribute1
+				{
+					property = "ace_advanced_fatigue_moduleSettings_Enabled";
+					expression = "_this setVariable ['Enabled',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType = "BOOL";
+							value = 1;
+						};
+					};
+				};
+				class Attribute2
+				{
+					property = "ace_advanced_fatigue_moduleSettings_RecoveryFactor";
+					expression = "_this setVariable ['RecoveryFactor',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType = "SCALAR";
+							value = 5.0;
+						};
+					};
+				};
+				class Attribute3
+				{
+					property = "ace_advanced_fatigue_moduleSettings_LoadFactor";
+					expression = "_this setVariable ['LoadFactor',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType = "SCALAR";
+							value = 0.3;
+						};
+					};
+				};
+				class Attribute4
+				{
+					property = "ace_advanced_fatigue_moduleSettings_PerformanceFactor";
+					expression = "_this setVariable ['PerformanceFactor',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType = "SCALAR";
+							value = 2.5;
+						};
+					};
+				};
+				nAttributes = 5;
+			};
+		};
+		class Item17
+		{
+			dataType = "Logic";
+			class PositionInfo
+			{
+				position[] = {9116.58,392.12845,655.61096};
+			};
+			id = 56;
+			type = "ace_captives_moduleSettings";
+			atlOffset = 354.94177;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property = "ace_captives_moduleSettings_requireSurrender";
+					expression = "_this setVariable ['requireSurrender',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType = "SCALAR";
+							value = 0.0;
+						};
+					};
+				};
+				class Attribute1
+				{
+					property = "ace_captives_moduleSettings_allowHandcuffOwnSide";
+					expression = "_this setVariable ['allowHandcuffOwnSide',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType = "BOOL";
+							value = 0;
+						};
+					};
+				};
+				class Attribute2
+				{
+					property = "ace_captives_moduleSettings_allowSurrender";
+					expression = "_this setVariable ['allowSurrender',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType = "BOOL";
+							value = 0;
+						};
+					};
+				};
+				class Attribute3
+				{
+					property = "ace_captives_moduleSettings_requireSurrenderAi";
+					expression = "_this setVariable ['requireSurrenderAi',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType = "BOOL";
+							value = 0;
+						};
+					};
+				};
+				nAttributes = 4;
+			};
+		};
+		class Item18
+		{
+			dataType = "Logic";
+			class PositionInfo
+			{
+				position[] = {9330.584,402.9986,647.8297};
+			};
+			id = 57;
+			type = "ACE_moduleCargoSettings";
+			atlOffset = 361.1116;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property = "ACE_moduleCargoSettings_enable";
+					expression = "_this setVariable ['enable',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType = "BOOL";
+							value = 1;
+						};
+					};
+				};
+				class Attribute1
+				{
+					property = "ACE_moduleCargoSettings_paradropTimeCoefficent";
+					expression = "_this setVariable ['paradropTimeCoefficent',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType = "STRING";
+							value = "2.5";
+						};
+					};
+				};
+				nAttributes = 2;
+			};
+		};
+		class Item19
+		{
+			dataType = "Logic";
+			class PositionInfo
+			{
+				position[] = {9077.0625,418.3726,874.9811};
+			};
+			id = 58;
+			type = "ACE_ModuleExplosive";
+			atlOffset = 380.1942;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property = "ACE_ModuleExplosive_RequireSpecialist";
+					expression = "_this setVariable ['RequireSpecialist',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType = "BOOL";
+							value = 0;
+						};
+					};
+				};
+				class Attribute1
+				{
+					property = "ACE_ModuleExplosive_PunishNonSpecialists";
+					expression = "_this setVariable ['PunishNonSpecialists',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType = "BOOL";
+							value = 0;
+						};
+					};
+				};
+				class Attribute2
+				{
+					property = "ACE_ModuleExplosive_ExplodeOnDefuse";
+					expression = "_this setVariable ['ExplodeOnDefuse',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType = "BOOL";
+							value = 1;
+						};
+					};
+				};
+				nAttributes = 3;
+			};
+		};
+		class Item20
+		{
+			dataType = "Logic";
+			class PositionInfo
+			{
+				position[] = {9539.985,218.39949,645.8766};
+			};
+			id = 59;
+			type = "acex_fortify_setupModule";
+			atlOffset = 174.38109;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property = "ace_fortify_setupModule_Budget";
+					expression = "_this setVariable ['Budget',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType = "SCALAR";
+							value = 100.0;
+						};
+					};
+				};
+				class Attribute1
+				{
+					property = "ace_fortify_setupModule_AddToolItem";
+					expression = "_this setVariable ['AddToolItem',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType = "BOOL";
+							value = 0;
+						};
+					};
+				};
+				class Attribute2
+				{
+					property = "ace_fortify_setupModule_Preset";
+					expression = "_this setVariable ['Preset',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType = "STRING";
+							value = "small";
+						};
+					};
+				};
+				class Attribute3
+				{
+					property = "ace_fortify_setupModule_Side";
+					expression = "_this setVariable ['Side',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType = "SCALAR";
+							value = 3.0;
+						};
+					};
+				};
+				nAttributes = 4;
+			};
+		};
+		class Item21
+		{
+			dataType = "Logic";
+			class PositionInfo
+			{
+				position[] = {9327.335,421.35547,883.7561};
+			};
+			id = 60;
+			type = "ACE_ModuleFriendlyFire";
+			atlOffset = 380.1931;
+		};
+		class Item22
+		{
+			dataType = "Logic";
+			class PositionInfo
+			{
+				position[] = {10010.879,58.34738,162.3197};
+				angles[] = {0.00799353,0.0,6.267187};
+			};
+			name = "zeusCurator";
+			id = 61;
+			type = "ModuleCurator_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property = "ModuleCurator_F_Owner";
+					expression = "_this setVariable ['Owner',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType = "STRING";
+							value = "";
+						};
+					};
+				};
+				class Attribute1
+				{
+					property = "ModuleCurator_F_Forced";
+					expression = "_this setVariable ['Forced',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType = "SCALAR";
+							value = 0.0;
+						};
+					};
+				};
+				class Attribute2
+				{
+					property = "ModuleCurator_F_Name";
+					expression = "_this setVariable ['Name',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType = "STRING";
+							value = "";
+						};
+					};
+				};
+				class Attribute3
+				{
+					property = "ModuleInfo";
+					expression = "false";
+					class Value
+					{
+						class data
+						{
+							singleType = "BOOL";
+							value = 1;
+						};
+					};
+				};
+				class Attribute4
+				{
+					property = "ModuleCurator_F_Addons";
+					expression = "_this setVariable ['Addons',_value,true];";
+					class Value
+					{
+						class data
+						{
+							singleType = "SCALAR";
+							value = 3.0;
+						};
+					};
+				};
+				nAttributes = 5;
+			};
+		};
+		class Item23
+		{
+			dataType = "Logic";
+			class PositionInfo
+			{
+				position[] = {10010.989,58.34366,162.56383};
+				angles[] = {0.00799353,0.0,6.267187};
+			};
+			id = 62;
+			type = "HighCommand";
+		};
+		class Item24
+		{
+			dataType = "Object";
+			class PositionInfo
+			{
+				position[] = {10010.98,59.539818,154.052};
+			};
+			side = "Empty";
+			flags = 5;
+			class Attributes
+			{
+				dynamicSimulation = 1;
+			};
+			id = 63;
+			type = "Land_CastleRuins_01_wall_10m_F";
+			atlOffset = -3.8146973e-06;
+		};
+		class Item25
+		{
+			dataType = "Object";
+			class PositionInfo
+			{
+				position[] = {10020.86,59.429993,153.865};
+			};
+			side = "Empty";
+			flags = 5;
+			class Attributes
+			{
+				dynamicSimulation = 1;
+			};
+			id = 64;
+			type = "Land_CastleRuins_01_wall_10m_F";
+		};
+		class Item26
+		{
+			dataType = "Object";
+			class PositionInfo
+			{
+				position[] = {10030.534,59.366665,153.625};
+			};
+			side = "Empty";
+			flags = 5;
+			class Attributes
+			{
+				dynamicSimulation = 1;
+			};
+			id = 65;
+			type = "Land_CastleRuins_01_wall_10m_F";
+		};
+		class Item27
+		{
+			dataType = "Object";
+			class PositionInfo
+			{
+				position[] = {10035.357,59.309513,157.83894};
+				angles[] = {0.0,4.7633386,-0.0};
+			};
+			side = "Empty";
+			flags = 5;
+			class Attributes
+			{
+				dynamicSimulation = 1;
+			};
+			id = 66;
+			type = "Land_CastleRuins_01_wall_10m_F";
+		};
+		class Item28
+		{
+			dataType = "Object";
+			class PositionInfo
+			{
+				position[] = {10036.047,59.27272,167.69649};
+				angles[] = {0.0,4.7633386,-0.0};
+			};
+			side = "Empty";
+			flags = 5;
+			class Attributes
+			{
+				dynamicSimulation = 1;
+			};
+			id = 67;
+			type = "Land_CastleRuins_01_wall_10m_F";
+		};
+		class Item29
+		{
+			dataType = "Object";
+			class PositionInfo
+			{
+				position[] = {10036.779,58.991184,177.34554};
+				angles[] = {0.0,4.7633386,-0.0};
+			};
+			side = "Empty";
+			flags = 5;
+			class Attributes
+			{
+				dynamicSimulation = 1;
+			};
+			id = 68;
+			type = "Land_CastleRuins_01_wall_10m_F";
+			atlOffset = -3.8146973e-06;
+		};
+		class Item30
+		{
+			dataType = "Object";
+			class PositionInfo
+			{
+				position[] = {10013.404,58.924683,182.15314};
+			};
+			side = "Empty";
+			flags = 5;
+			class Attributes
+			{
+				dynamicSimulation = 1;
+			};
+			id = 69;
+			type = "Land_CastleRuins_01_wall_10m_F";
+			atlOffset = -3.8146973e-06;
+		};
+		class Item31
+		{
+			dataType = "Object";
+			class PositionInfo
+			{
+				position[] = {10023.284,58.887283,181.96614};
+			};
+			side = "Empty";
+			flags = 5;
+			class Attributes
+			{
+				dynamicSimulation = 1;
+			};
+			id = 70;
+			type = "Land_CastleRuins_01_wall_10m_F";
+		};
+		class Item32
+		{
+			dataType = "Object";
+			class PositionInfo
+			{
+				position[] = {10032.958,58.738018,181.72614};
+			};
+			side = "Empty";
+			flags = 5;
+			class Attributes
+			{
+				dynamicSimulation = 1;
+			};
+			id = 71;
+			type = "Land_CastleRuins_01_wall_10m_F";
+		};
+		class Item33
+		{
+			dataType = "Object";
+			class PositionInfo
+			{
+				position[] = {10008.029,59.2857,178.13107};
+				angles[] = {0.0,4.713509,-0.0};
+			};
+			side = "Empty";
+			flags = 5;
+			class Attributes
+			{
+				dynamicSimulation = 1;
+			};
+			id = 72;
+			type = "Land_CastleRuins_01_wall_10m_F";
+		};
+		class Item34
+		{
+			dataType = "Object";
+			class PositionInfo
+			{
+				position[] = {10007.58,59.562527,158.57785};
+				angles[] = {0.0,4.713509,-0.0};
+			};
+			side = "Empty";
+			flags = 5;
+			class Attributes
+			{
+				dynamicSimulation = 1;
+			};
+			id = 73;
+			type = "Land_CastleRuins_01_wall_10m_F";
+		};
+		class Item35
+		{
+			dataType = "Object";
+			class PositionInfo
+			{
+				position[] = {10007.778,59.561726,168.45752};
+				angles[] = {0.0,4.713509,-0.0};
+			};
+			side = "Empty";
+			flags = 5;
+			class Attributes
+			{
+				dynamicSimulation = 1;
+			};
+			id = 74;
+			type = "Land_CastleRuins_01_wall_10m_F";
+		};
+		class Item36
+		{
+			dataType = "Object";
+			class PositionInfo
+			{
+				position[] = {5206.9873,72.284935,346.1717};
+				angles[] = {0.0,4.2835655,-0.0};
+			};
+			side = "Empty";
+			flags = 5;
+			class Attributes{};
+			id = 76;
+			type = "Land_Cargo_Tower_V3_F";
+			atlOffset = 0.066078186;
+		};
+		class Item37
+		{
+			dataType = "Object";
+			class PositionInfo
+			{
+				position[] = {5154.729,63.894726,227.53432};
+				angles[] = {0.0,1.2842592,-0.0};
+			};
+			side = "Empty";
+			flags = 5;
+			class Attributes{};
+			id = 77;
+			type = "Land_Cargo_Patrol_V3_F";
+		};
+		class Item38
+		{
+			dataType = "Object";
+			class PositionInfo
+			{
+				position[] = {5230.705,68.661514,399.75284};
+				angles[] = {0.0,2.0265758,-0.0};
+			};
+			side = "Empty";
+			flags = 5;
+			class Attributes{};
+			id = 78;
+			type = "Land_Cargo_Patrol_V3_F";
+		};
+		class Item39
+		{
+			dataType = "Marker";
+			position[] = {4715.3115,239.82397,122.91748};
+			name = "port_2";
+			type = "loc_Quay";
+			id = 98;
+			atlOffset = 178.46638;
+		};
+		class Item40
+		{
+			dataType = "Marker";
+			position[] = {3698.38,91.766,6260.56};
+			name = "marker_2";
+			markerType = "ELLIPSE";
+			type = "";
+			a = 200.0;
+			b = 200.0;
+			id = 99;
+			atlOffset = -4.1182404;
+		};
+		class Item41
+		{
+			dataType = "Object";
+			class PositionInfo
+			{
+				position[] = {3736.408,108.12343,6243.619};
+				angles[] = {0.0,1.5965886,-0.0};
+			};
+			side = "Empty";
+			flags = 5;
+			class Attributes{};
+			id = 100;
+			type = "Land_Cargo_Tower_V3_F";
+		};
+		class Item42
+		{
+			dataType = "Object";
+			class PositionInfo
+			{
+				position[] = {3846.8123,97.131134,6261.0283};
+				angles[] = {0.0,4.9094667,-0.0};
+			};
+			side = "Empty";
+			flags = 5;
+			class Attributes{};
+			id = 101;
+			type = "Land_Cargo_Patrol_V3_F";
+		};
+		class Item43
+		{
+			dataType = "Object";
+			class PositionInfo
+			{
+				position[] = {3702.788,99.77329,6185.604};
+				angles[] = {0.0,1.0935118,-0.0};
+			};
+			side = "Empty";
+			flags = 5;
+			class Attributes{};
+			id = 102;
+			type = "Land_Cargo_Patrol_V3_F";
+		};
+		class Item44
+		{
+			dataType = "Object";
+			class PositionInfo
+			{
+				position[] = {3804.4465,99.50255,6368.032};
+				angles[] = {0.0,3.933339,-0.0};
+			};
+			side = "Empty";
+			flags = 5;
+			class Attributes{};
+			id = 103;
+			type = "Land_Cargo_Patrol_V3_F";
+		};
+	};
+	class Connections
+	{
+		class LinkIDProvider
+		{
+			nextID = 1;
+		};
+		class Links
+		{
+			items = 1;
+			class Item0
+			{
+				linkID = 0;
+				item0 = 32;
+				item1 = 62;
+				class CustomData
+				{
+					type = "Sync";
+				};
+			};
+		};
+	};
+};

@@ -1,0 +1,131 @@
+Some useful functions from other the other mods bundled with this that may be useful to be aware of.
+
+VCOMAI:
+	(group this) setVariable ["VCM_NOFLANK",true]; //This command will stop the AI squad from executing advanced movement maneuvers.
+	(group this) setVariable ["VCM_NORESCUE",true]; //This command will stop the AI squad from responding to calls for backup.
+	(group this) setVariable ["VCM_TOUGHSQUAD",true]; //This command will stop the AI squad from calling for backup.
+	(group this) setVariable ["Vcm_Disable",true]; //This command will disable Vcom AI on a group entirely.
+	(group this) setVariable ["VCM_DisableForm",true]; //This command will disable AI group from changing formations.	
+	(group this) setVariable ["VCM_Skilldisable",true]; //This command will disable an AI group from being impacted by Vcom AI skill changes.
+
+LambsFSM (from GitHub Wiki):
+	setVariables:
+		Main:
+			<group> setVariable ["lambs_danger_disableGroupAI", true]; - Disables certain LAMBS features, such as coordinating assults with other groups, ambushing vehicles, ect.
+			<unit> setVariable ["lambs_danger_disableAI", true]; - Self explanitory, will prevent AI from intentially entering and clearing buildings
+			<group> setVariable ["lambs_danger_dangerFormation", "FILE"]; - Formation group will attempt to switch to on first contact. (Useful for Ex: CQC units closing distance)
+			<unit> setVariable ["lambs_danger_dangerRadio", true]; - If group contains unit with radio variable, increases there reporting range,frequency, and accuracy according to settings
+			<group> setVariable ["lambs_danger_enableGroupReinforce", true, true] - Groups with the reinforcement variable set will respond to friendly information sharing events.
+				Possible Responses Include:
+					- Change formation and move towards or reposition group members according to threat type and group's equipment
+					- Fire Flares towards known threat direction
+					- Reposition/Move static weapons via dismentaling/assembling
+					- Change group formation according to threat type
+					(Should not interfere with other mods or scripted AI orders)
+		Info:
+			<group> getVariable "lambs_danger_isExecutingTactic"
+			<group> getVariable "lambs_danger_contact"
+		Debug/Testing:
+			<unit> getVariable "lambs_main_FSMDangerCauseData" - Checking this variable will give the current FSM data that the AI is responding to.
+			<unit> getVariable "lambs_main_currentTarget"
+			<unit> getVariable "lambs_main_currentTask"
+			<group> getVariable "lambs_main_currentTactic"
+	
+	AI scripted commands:
+		*Note "Area" refers to an array of: [sizeX, sizeY, angle, isRectangle, sizeZ]
+		taskArtillery: 
+			- [ArtillaryUnit, targetPos, strikeCaller, roundsToFire, accuracy(int: 0-100), requiresAmmo (boolean)] spawn lambs_wp_fnc_taskArtillery;
+			- Preforms artillary strike at given position
+		taskArtilleryRegister: 
+			- [artillaryUnitOrGroup] call lambs_wp_fnc_taskArtilleryRegister;
+			- Registers unit as an artillary peices for artillary support requests
+		taskAssault:
+			- [unitToDoCharge, destinationPos, IsForcedRetreat, distanceThreshold, updateCycle, isCalledForWaypoint] spawn lambs_wp_fnc_taskAssault;
+			- Causes AI to wrecklessly charge a given positoin, with optional retreat parameters
+		taskCamp:
+			- [group, centerOfCamp, rangeToSendPatrols, campArea, canTeleportUnitsToPos, allowPartialPatrols] call lambs_wp_fnc_taskCamp;
+			- Improved (aka built for lambs) version of CBA_fnc_taskDefend
+		taskCQB:
+			- [group, centerPos, range, cycleDelay, campArea, doCalledForWaypoints] spawn lambs_wp_fnc_taskCQB;
+			- Assigned Group will apply logic to search and clear all buildings in a radius
+		taskGarrison:
+			- [group, garrisonCenter, radius, campArea, doTeleportUnits, sortBasedOffHeight, conditionToFreeUnit, doSubGroupsPatrol] call lambs_wp_fnc_taskGarrison;
+			- The AI will occupy buildings and man static weapons in area, will remain in place until a freeing condition is met
+			- conditions are (-2 Random, -1 All, 0 None, 1 Hit, 2 Fired, 3 FiredNear, 4 Suppressed),
+		taskPatrol:
+			- [group, position, radius, maxWaypoints, campArea, doDynamicPatrolPatterns] call lambs_wp_fnc_taskPatrol;
+			- Simple dynamic patrol script, only for infantry
+		taskReset
+			- [group] call lambs_wp_fnc_taskReset;
+			- Correctly stops any assigned lambs tasks for a group
+		taskRush
+			- [group, maxRange, cyclesDelay, campArea, centerPos, doOnlyHuntPlayers] spawn lambs_wp_fnc_taskRush;
+			- AI will aggresivly hunt closest group with perfect knowledge, but will not begin firing without having seen target
+		taskHunt
+			- [group, maxRange, cyclesDelay, campArea, centerPos, doOnlyPlayers, doDynamicReinforcement, flareSetting] spawn lambs_wp_fnc_taskHunt;
+			- AI will patrol an area around the closest target which gradually grows smaller around target.
+			- Flare options include: 0 disabled, 1 enabled (if Units cant fire it them self a flare is created via createVehicle), 2 Only if Units can Fire UGL them self
+		taskCreep
+			- [group, maxRange, cyclesDelay, campArea, centerPos, doOnlyPlayers] spawn lambs_wp_fnc_taskCreep;
+			- AI uses cover to attempt to get as close to the nearest target as possible before opening fire.
+			
+	Global Variables:
+		disableAIGestures(boolean)
+			- Toggles unit gestures and hand signals when reacting to danger or executing planned manoeuvres
+		disableAICallouts(boolean)
+			- Toggles extra unit callouts based on situations
+		disableAIDodge(boolean)
+			- Toggles unit quickly dodging or changing stance in response to being hit.\nImmediate reactions force an animation to run. Disabling will make for a more static AI
+		disableAIFleeing(boolean)
+			- Toggles enhanced fleeing function for units.
+		indoorMove(0 - 1, inc 0.1, 2)
+			- Indoor Move Chance
+		disableAutonomousMunitionSwitching(boolean)
+			- When unchecked allows the vehicle to autonomously switch munition type in favor against the current target. E.g., AP against armored targets, HE against unarmored ones
+		disablePlayerGroupSuppression(boolean)
+			- Toggle autonomous suppression for units in player group
+		minSuppressionRange(1-500, inc 50, 0)
+			- If the target or a blocking obstacle is within this distance, the AI will not perform suppression fire
+		minFriendlySuppressionDistance(0 - 50, inc 5, 0)
+			- If there are allies within this distance, AI will not perform suppression fire. Set to 0 to disable.
+		minObstacleProximity(0-20, inc 5, 2)
+			- Minimum Obstacle Proximity Distance for Suppressive Fire
+		radioDisabled(boolean)
+			- Toggle information sharing between units
+		maxRevealValue(0-4, inc 1, 2)
+			- Maximum 'knowsAbout' value shared between groups. Setting greater than 1 may cause distant allies to go into full danger mode.
+		combatShareRange(0-1000, inc 200, 0)
+			- Friendly groups within range will be set to combat behaviour. Units in combat mode will seek cover and concealment and turn towards nearest known threat.
+		radioShout(20-200, inc 100, 0)
+			- Range AI units share information without radios
+		radioWest(20-3000, inc 500, 0)
+			- Base range side WEST share information
+		radioEast(20-3000, inc 500, 0)
+			- Base range side EAST share information
+		radioGuer(20-3000, inc 500, 0)
+			- Base range side GUER share information
+		radioBackpack(500-6000, inc 2000, 0)
+			- Units equipped with backpack radios (vanilla, TFAR, or configured by variable) add this value to the base information sharing range
+		debug_FSM(boolean)
+			- Shows FSM debug messages
+
+HAL_AI:
+	RydHQ_SubAll = false;
+	RydHQ_UnlimitedCapt = true;
+	RydHQ_Surr = false;
+	RydHQ_Included = []; //Requires group names
+	RydHQ_ObjRadius1 = 300; //Interal Radius
+	RydHQ_ObjRadius2 = 500; //External Radius
+	RydHQ_Muu = 1; //Tendancy to flee, 0 disables fleeing. Higher = Higher chance to flee;
+	RydHQ_RapidCapt = 10; //Percentage chance for capturing objectives rather than destroying enemey, simulates Reckless AI mode
+	RydHQ_Withdraw = 1; //Affects chance of tactical withdrawl, 0 disables, higher = less chance to withdrawl
+	RydHQ_MAtt = true; //Whether AI personailty is random or manually set
+	RydHQ_Personality = "GENIUS"; //Default personailties include: GENIUS, IDIOT, COMPETENT, EAGER, DILATORY (overly slow), SCHEMER, BRUTE, CHAOTIC, OTHER (completly random)
+	RydHQ_CargoFind = 200; //Distance units look for empty vehices to use
+
+	nul = [] execVM "RydHQInit.sqf"; //Should be ran once AI settings are prepared, starts AI
+
+	LeaderHQ = driver this; //Leader command unit, does not neccesarilly need to be on the map, per se
+	RydHQ_SimpleObjs = [myobj1,myobj2,myobj3]; //Array of gamelogic for objectives, amount and order doesnt matter
+
+	[] call RYD_KillHetman; //Fully disables AI

@@ -1,0 +1,3 @@
+prefix=overthrow_nr6_hal;
+//PboType=Arma Addon;
+//</properties>

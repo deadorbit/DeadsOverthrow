@@ -1,0 +1,3 @@
+class OT_RscAdminMapPanal {
+	
+};

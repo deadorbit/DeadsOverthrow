@@ -1,0 +1,25 @@
+/*
+	Arma 3, unlike most modern UI systems, does not allow for simple "child-parent" coordinate system, which can greatly complicated the process of making complex UIs
+	The only exeception being children of a control group, which still does not act as expected. However using macros, this can be alivated somewhat (aka avoid doing math via calculator *vomits*)
+	
+	The general system is to define a macro with the same x,y,h,w values as the "parent", define a macro for the child x,y,h,w, and optionally spacing, and calculate the two.
+
+	X and Y, despite 0,0 being the top left corner of the group container, still must be multiplied by P_WIDTH and P_HEIGHT as 0.1 still represents moving 10% of the total screen size, not 10% of the parent size.
+	However they shouldnt be affected by safezoneX or safezoneY, as thats already accounted for by the parents position
+	I.e: X = (relative_X_Position_In_Parent) * parent_H_Size * safezoneH
+	
+	Additionally, Arma 3 UI engine has no way to relativly scale a child to its parent/another container, so this system exist so that the values H,W(1,1) would cover the parent exactly
+	I.e: H = (relative_HSize_To_Parent) * parent_H_Size * safezoneH
+	
+	In the event the container is not a child of a controlGroup, x,y,h,w must additionally be summed to parent_X and parent_Y, and have the safezone adjust accordingly
+	I.e X = (relative_X_Position_In_Parent + parent_X_Position) * parent_H_Size * safezoneH
+	
+	Note: should make macro functions for less repedative math
+	Note: possibly look into employing #_EXEC and #_EVAL which may result in a more graceful solution
+	Note: CBA probably has already solved this
+	
+	General deads_overthrow UI standards:
+		UI themes (I.e colors, fonts, ect.) should be defined once in the defines.hpp file.
+		Images/textures in classes should never be tight coupled with a directory, I.e if  a directory is moved, it should only ever cause one error inside the image_component.hpp file (Arma can make this an utter pain, so sometimes it may be neccessary)
+		overthrow currently uses the SAFEZONE ui coordinate system (should be migrated to GUI_GRID, or even PixelGrid, if possible), as state in the BI documentation, UI coordinate systems should never be crossed
+*/

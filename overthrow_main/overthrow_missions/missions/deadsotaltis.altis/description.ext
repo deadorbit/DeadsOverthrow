@@ -1,0 +1,7 @@
+#include "\overthrow_missions\shared\components\mission_component.inc"
+#include "data\components\missionCustomization_component.inc"
+
+class CfgOverthrowMissions {
+	#include "\overthrow_missions\shared\data\jobs\cfgoverthrowmissions.inc"
+	#include "data\jobs\cfgoverthrowmissions.inc"
+};

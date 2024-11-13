@@ -1,0 +1,16 @@
+//Contains macros for all other UI files
+#include "..\ui\dialogs\defines.hpp"
+
+#include "..\ui\dialogs\admin\admin.hpp"
+#include "..\ui\dialogs\build.hpp"
+#include "..\ui\dialogs\business.hpp"
+#include "..\ui\dialogs\factory.hpp"
+#include "..\ui\dialogs\hud\hud.hpp"
+#include "..\ui\dialogs\main\main.hpp"
+#include "..\ui\dialogs\overrides.hpp"
+#include "..\ui\dialogs\place.hpp"
+#include "..\ui\dialogs\recruits.hpp"
+#include "..\ui\dialogs\resistance.hpp"
+#include "..\ui\dialogs\shop.hpp"
+#include "..\ui\dialogs\sleep.hpp"
+#include "..\ui\dialogs\test.hpp"

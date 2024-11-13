@@ -1,0 +1,1 @@
+#include "..\..\shared\components\initplayerlocal_component.inc"

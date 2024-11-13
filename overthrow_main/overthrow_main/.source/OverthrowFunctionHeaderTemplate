@@ -1,0 +1,41 @@
+Modified from CBA script headers. Should be at the top of every function.
+
+/* ----------------------------------------------------------------------------
+Function: T	AG_fnc_functionName							<- Should be the internal variable that calls the function, in the casing it should be conventially called with.
+
+
+Catagory: 	Uncatagorized								<- Function Catagory from https://community.bistudio.com/wiki/Category:Arma_3:_Functions
+
+Description: A cool function that does the thing described when you call it. It might
+	Even do other things which I will also include in this brief paragraph description.
+	
+Locailty: Local or Global								<- Does the function only change things on one machine or all
+
+Parameters:
+	-	_coolVar(dataType)				Default: ""		Controls the amount of coolness in the function.
+	Include the variable name _asItAppearsInTheCode, the datatype it is or can be (String,Array). Lastly, a brief description
+	explaining what it affects. A default value is not neccessary, but typically reccomeded as good practice, even for 
+	mandatory variables.
+
+Optional:
+	-	_coolVarWithDefault(Integer)	Default: 0		Controls the amount of coolness, but you don't need it.
+	Self explaintory mostly, for variables that may only sometimes be 
+
+Example:
+	- Always try to include atleast one example, no matter how simple its use may seem
+		You can also include an explanation if its a particuarly nuanced system.
+
+Returns:
+    - Nil												<- Datatype the function WILL ALWAYS return. Must only be one type.
+
+Notes:
+	-N/A												<- Anything else that must be said can go here
+
+Author:
+    deadorbit											<- Authors, contributors, or honorable mentions
+---------------------------------------------------------------------------- */
+
+Not part of the header, but also generally good practice to define all your private
+variables and parameters at the top, where they can be easily glanced at. Also important
+is that if the name of the variable dosn't clearly explain its purpose, a comment should
+be included around it to explain what it does.

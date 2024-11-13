@@ -1,0 +1,1 @@
+call OT_fnc_gunDealerDialog;

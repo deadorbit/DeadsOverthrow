@@ -1,0 +1,1 @@
+#include "..\..\shared\components\CBASettings_component.inc"

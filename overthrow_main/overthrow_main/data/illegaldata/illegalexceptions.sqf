@@ -1,0 +1,31 @@
+//Itsms that are forced to be considered legal
+[
+	"",
+	"hgun_Pistol_Signal_F",
+	"ACE_FakePrimaryWeapon",
+	"eo_flashlight",
+	"rhs_weap_rsp30_white",
+	"rhs_weap_rsp30_green",
+	"rhs_weap_rsp30_red",
+	"rhs_weap_tr8",
+	"ACE_VMH3",
+	"ACE_VMM3",
+	"ACE_Flashlight_Maglite_ML300L",
+	"ACE_NVG_Gen1",
+	
+	//Chemlights
+	"Chemlight_blue",
+	"Chemlight_green",
+	"Chemlight_red",
+	"Chemlight_yellow",
+	"Chemlight_blue",
+	"ACE_Chemlight_Orange",
+	"ACE_Chemlight_White",
+	"ACE_Chemlight_HiRed",
+	"ACE_Chemlight_HiYellow",
+	"ACE_Chemlight_HiWhite",
+	"ACE_Chemlight_HiBlue",
+	"ACE_Chemlight_HiGreen",
+	"ACE_Chemlight_UltraHiOrange",
+	"ACE_Chemlight_IR"
+]
